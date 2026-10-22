@@ -9,7 +9,7 @@
 </p>
 <p align="center"><a href="README.zh-CN.md">简体中文</a> · <a href="https://github.com/CauT/lens-proxy/releases">Download</a> · <a href="docs/guide/usage.md">User guide</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 
-![Lens inspecting a demonstration request and JSON response](docs/images/inspector.png)
+![Lens inspecting a demonstration request and JSON response](docs/images/inspector.jpg)
 
 Lens brings request inspection, traffic editing and phone debugging into a Mac
 workspace. Inspect headers and bodies, pause a request, change its destination,
@@ -72,7 +72,7 @@ user CAs or pin certificates; Lens does not bypass that protection.
 LAN starts disabled on every app launch. All devices able to reach an enabled
 LAN address can connect.
 
-![Lens device setup](docs/images/device-setup.png)
+![Lens device setup](docs/images/device-setup.jpg)
 
 ## Build from source
 

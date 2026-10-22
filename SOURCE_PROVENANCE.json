@@ -1,5 +1,5 @@
 {
-  "source_commit": "e0c1962db6c656d86417659f3e5ae8c0011952ab",
+  "source_commit": "453731e8ef5cf4dc8e52a0317a237e08e25f7b58",
   "source_dirty": false,
   "files": [
     {
@@ -32,11 +32,11 @@
     },
     {
       "path": "README.md",
-      "sha256": "cbe5c8dda736909c0898a483992f7175f63b2341d7bfdf305f6f22b05205f5bb"
+      "sha256": "bbc8f0b4addbb6e261e1524d50bd478a87423df89301e64a6036037fc68cec71"
     },
     {
       "path": "README.zh-CN.md",
-      "sha256": "18ee91171a8a98652bd10ac470a428830279bbb0b6ae94287dac4eb3bd8e278e"
+      "sha256": "4676a5e891c4485882f38ac4a6dd87c47c043cf39b1d016d2bdbc2991ffe88a9"
     },
     {
       "path": "SECURITY.md",
@@ -188,18 +188,18 @@
     },
     {
       "path": "docs/guide/usage.md",
-      "sha256": "fea7f804f0b8163f695df55ae97c29770f2fae48701c8f87c75bd44946138b3c"
+      "sha256": "dc9d12b963ff68a429eec7e019c70d614e87fa03fb822a37973a7a2949b09313"
     },
     {
       "path": "docs/images/README.md",
-      "sha256": "699a95f2fe75d5c8c110e0c53649bcea5cee56793dbbc1d75a2075739ce55795"
+      "sha256": "37a0cfee4f07d3263d87ac24766febbcb8cc3d5afd0616a6ad13373770a5d6bc"
     },
     {
-      "path": "docs/images/device-setup.png",
+      "path": "docs/images/device-setup.jpg",
       "sha256": "9f4b66a33e4ea3747763e4d358422423b8d1e028354e73474f120a43fc1175a1"
     },
     {
-      "path": "docs/images/inspector.png",
+      "path": "docs/images/inspector.jpg",
       "sha256": "67f066dd3c2c7b49518029204eeea1cff92d13cf971b0d1779960c205777e29e"
     },
     {
@@ -207,7 +207,7 @@
       "sha256": "357864133296a8054650d4fbfa853a32d3c61dc1307d9397d0d0b5c3117de90a"
     },
     {
-      "path": "docs/images/request.png",
+      "path": "docs/images/request.jpg",
       "sha256": "e021c9d0acfe0bba79cd158ef5bbc6e428ca9a4019df85253b1d722fb5d6dce2"
     },
     {

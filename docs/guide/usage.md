@@ -65,7 +65,7 @@ write local files at chosen destinations. Clear/Close offer save-copy choices.
 Named workspace saves are the durable handoff; Stop's private retained snapshot
 is overwritten on a later successful Stop.
 
-![Request headers and JSON body in the actual Lens app](../images/request.png)
+![Request headers and JSON body in the actual Lens app](../images/request.jpg)
 
 ## Troubleshooting
 

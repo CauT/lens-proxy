@@ -3,7 +3,7 @@
 <p align="center"><strong>看清请求，读懂响应。</strong><br>使用 SwiftUI 与 mitmproxy 构建的原生 macOS HTTP / HTTPS 抓包工具。</p>
 <p align="center"><a href="README.md">English</a> · <a href="https://github.com/CauT/lens-proxy/releases">下载预览版</a> · <a href="docs/guide/usage.md">使用说明</a> · <a href="CONTRIBUTING.md">参与贡献</a></p>
 
-![Lens 请求与 JSON 响应界面](docs/images/inspector.png)
+![Lens 请求与 JSON 响应界面](docs/images/inspector.jpg)
 
 Lens 将请求检查、流量修改和手机代理抓包放进原生 Mac 工作区。可以检查头部与
 正文、编辑断点、映射地址、重放请求，并保存多会话工作区。处理在本地进行，
@@ -47,7 +47,7 @@ HTTP 上游。手机抓包不需要接管 Mac 系统代理。
 4. 浏览器打开 **`http://lens.invalid/`**，与 Mac 核对 CA 指纹，下载后作为 **CA 证书**安装。
 5. 打开 HTTPS 网页，在 Lens 检查 Request / Response 正文；只有 CONNECT 不算解密成功。
 
-![手机设置引导](docs/images/device-setup.png)
+![手机设置引导](docs/images/device-setup.jpg)
 
 Android“网络可能受到监控”的提醒与浏览器阻止访问的证书错误不同。
 HTTP 页面能打开仅证明代理连通。换 Mac 或重建 CA 后需重新核对指纹。
