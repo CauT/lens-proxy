@@ -1,0 +1,12 @@
+.python/
+.venv/
+.local-evidence/
+.build/
+.runtime/
+*.app/
+__pycache__/
+*.pyc
+.DS_Store
+*.dmg
+*.zip
+*.verification.json

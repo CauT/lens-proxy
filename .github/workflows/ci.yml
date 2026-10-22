@@ -1,0 +1,33 @@
+name: macOS CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Prepare pinned runtime
+        run: bash scripts/bootstrap.sh
+      - name: Engine semantics
+        run: PYTHONPATH=engine .runtime/bin/python -B -m unittest discover -s engine -v
+      - name: Build standalone application
+        run: bash scripts/build-app.sh
+      - name: Wire and process identity workflows
+        env:
+          PYTHONPATH: ${{ github.workspace }}/Lens.app/Contents/Resources/site-packages
+          LENS_TEST_ENGINE: ${{ github.workspace }}/Lens.app/Contents/Resources/engine/engine.py
+        run: |
+          .runtime/bin/python -B -m unittest discover -s tests -p test_e2e.py -v
+          .runtime/bin/python -B -m unittest discover -s tests -p test_peer_process.py -v
+      - name: Packaging regressions
+        run: .runtime/bin/python -B -m unittest discover -s tests -p test_packaging.py -v

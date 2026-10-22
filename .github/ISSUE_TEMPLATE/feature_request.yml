@@ -1,0 +1,9 @@
+name: Feature request
+description: Describe a debugging workflow Lens could improve
+body:
+  - type: textarea
+    id: workflow
+    attributes:
+      label: User problem and proposed workflow
+    validations:
+      required: true

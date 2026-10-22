@@ -1,0 +1,21 @@
+name: Bug report
+description: Report a reproducible Lens problem with sanitized evidence
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Lens version, macOS version and CPU
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include browser/client version and proxy setup; redact private traffic.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized screenshot or error text
+      description: Never upload private CA keys, credentials or unreviewed captures.

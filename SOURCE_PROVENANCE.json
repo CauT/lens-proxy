@@ -1,0 +1,866 @@
+{
+  "source_commit": "e0c1962db6c656d86417659f3e5ae8c0011952ab",
+  "source_dirty": false,
+  "files": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "sha256": "95c2c6fd895419410bc7ce480456271911f1d4a9a4fcda718c5889d8ec3e6d7a"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "sha256": "ecf207fdedd6f38eae093d0114322c0ca9cab8b42fee7f2ddca8777a7eef58e6"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "b921554e18937782ff67e3797b6e02ceaa6cd6cd0e55c2854e1fd999d810a2a4"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "8203efd8bb53384b25633956a3f75e86e9be45e8d7e39469c025c3951c7a8387"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "441bc7009c73dadf3315c7adaa2ed06a9d893fa731cd3fa72dad9b3ef411c332"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "454dc527854dfb319e093cf1e51e2baafbf7e62cc7a1dec11fcf8faa864e8eba"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "cbe5c8dda736909c0898a483992f7175f63b2341d7bfdf305f6f22b05205f5bb"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "sha256": "18ee91171a8a98652bd10ac470a428830279bbb0b6ae94287dac4eb3bd8e278e"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "1c0230771a697d24d2a4300bcfe2f19fa3db972010665959cefa961364869551"
+    },
+    {
+      "path": "Sources/Lens/AccessListsView.swift",
+      "sha256": "e4d06057a69af5baef730edf19725687e70bc8b4e1051a09f84536eaa96dd51f"
+    },
+    {
+      "path": "Sources/Lens/ApplicationLifecycle.swift",
+      "sha256": "6fd74bc6ec41adb893a2ea3082eaca9a199c7b7028494f9696a89ffbea2958e1"
+    },
+    {
+      "path": "Sources/Lens/BodyFormatting.swift",
+      "sha256": "f14ec2ac3e8b0cae5898a4d835a81b551c19e3a232bf68374d0877aa46a196f0"
+    },
+    {
+      "path": "Sources/Lens/BodyTextView.swift",
+      "sha256": "044149fa3e0a50c4a2a35eb09dc303bb6f1938d1d71167b08b9ac3a16046f183"
+    },
+    {
+      "path": "Sources/Lens/BreakpointEditor.swift",
+      "sha256": "a2cb7d331a4c824829c4f450d1bbeb882d319d8d1546bf5b5490bc13a356028a"
+    },
+    {
+      "path": "Sources/Lens/CaptureGuide.swift",
+      "sha256": "3d626f639b247dc2177ca85570a3b99d634cd10d0b0a785aba060d1f1fd4b44a"
+    },
+    {
+      "path": "Sources/Lens/ComposeView.swift",
+      "sha256": "a983db9233a799f35a1f7bafd6032cca65e70fd47214f38f753347c3585a9529"
+    },
+    {
+      "path": "Sources/Lens/ConnectionGuideView.swift",
+      "sha256": "64dd78600ad9b9a0aa1237ef85270c61dd26fc7c28c688ff8dd0f88fc623a875"
+    },
+    {
+      "path": "Sources/Lens/CurlCommand.swift",
+      "sha256": "306658b89a0019429a8a7c73d438981a0980b2248e649e9b2e59a8980f8cfd24"
+    },
+    {
+      "path": "Sources/Lens/HTTPMessageEditor.swift",
+      "sha256": "7330b3f737a4425d77d19707975197a1c6e2fadd063474aa97b1581c9e9b6802"
+    },
+    {
+      "path": "Sources/Lens/LANAccess.swift",
+      "sha256": "20b4d66bdc085e547a38b94aaf2e05ccd6062b5924eb8ee88e5f76c8f042d6dc"
+    },
+    {
+      "path": "Sources/Lens/LensApp.swift",
+      "sha256": "df857b0fe60f9dfe0a7cd6428c17fbd66f1dcc3d9dd9bf6295109910224c52e8"
+    },
+    {
+      "path": "Sources/Lens/LensStore.swift",
+      "sha256": "a168ce2f1478aa86d531110b7596639980c65996dac58ded5a908b4476a455ba"
+    },
+    {
+      "path": "Sources/Lens/Models.swift",
+      "sha256": "0cd965dba743fc350191372f06dfc36981c2b54c43b5b7a25f2a157593e80098"
+    },
+    {
+      "path": "Sources/Lens/MultipartFormatting.swift",
+      "sha256": "5a222ab4cc3697198678fc4dd6426517b3da985b2766fe3398dc641bdc8ea272"
+    },
+    {
+      "path": "Sources/Lens/NativeJSON.swift",
+      "sha256": "f4679029c65ded3f0920a176a6d3fbd27eb1f48353acbfb32cf71a68ce7023ce"
+    },
+    {
+      "path": "Sources/Lens/NetworkSettingsView.swift",
+      "sha256": "00fc727005730f3f940d46e445d12c85f4ca9344c9a0a7bd9cc2fe1f245bd505"
+    },
+    {
+      "path": "Sources/Lens/RepeatView.swift",
+      "sha256": "adaf588ce2aeb5f359d554a06d6fd5ef156f0cef73aa53ceebd8e209aa4567d8"
+    },
+    {
+      "path": "Sources/Lens/RulesView.swift",
+      "sha256": "3990a113fcae65b5c6c9b2bb455a2aaf2d74ce4a875adea0df0080d11637b021"
+    },
+    {
+      "path": "Sources/Lens/SessionActionView.swift",
+      "sha256": "52f34bbe9aa0b53228bb86b539fa0789763d917391734818e1e9bdf7a8c38099"
+    },
+    {
+      "path": "Sources/Lens/SessionArtifacts.swift",
+      "sha256": "be4cee91412e68b759e3492e3679fe002b99b844a8696052e232514e76dbe31c"
+    },
+    {
+      "path": "Sources/Lens/SessionTools.swift",
+      "sha256": "a5c8018185b4df9716bf98e10e8a1da2a5e18cc31919abecd4eed2711ac9f57c"
+    },
+    {
+      "path": "Sources/Lens/SystemProxy.swift",
+      "sha256": "7783b4c9100708277a6d1feaa56b949a5715c64dffcdbc4a8caae07a43245501"
+    },
+    {
+      "path": "Sources/Lens/TCPStreamsView.swift",
+      "sha256": "fd53b3d0874935184c9897ff3ed01c63089f53e1ebfd6ea7f0a1788b1a2cd593"
+    },
+    {
+      "path": "Sources/Lens/UDPDatagramsView.swift",
+      "sha256": "c04bd4b89c75f16fad2c93570917465fc5aad75cb3e2ad03fa70f1f1482be0b3"
+    },
+    {
+      "path": "Sources/Lens/Views.swift",
+      "sha256": "c797efed788ae88150e92f4df6f21d373dec988acd805eb81afc1bde66182559"
+    },
+    {
+      "path": "Sources/Lens/WebSocketView.swift",
+      "sha256": "7455885240d71ef7a0e74db4449bdf2c5861d781e41f63d5feb2b062a9b8bed4"
+    },
+    {
+      "path": "Sources/Lens/WorkspaceDocumentState.swift",
+      "sha256": "1724451739961ceff51a26689ed37402c4ed42d8436803d59bb5862c25d7fd24"
+    },
+    {
+      "path": "Sources/Lens/WorkspaceHistory.swift",
+      "sha256": "9f0de361df451455ccc11b8dd71a869c47d135576bfe72c77bb7920e7a7861a4"
+    },
+    {
+      "path": "Sources/PeerIdentity/PeerIdentityMain.swift",
+      "sha256": "4496e3a433caa2a5579328e4e589c0874fa07757080566cc3fcad003c03bec42"
+    },
+    {
+      "path": "Sources/PeerIdentity/ProcessIdentityReader.swift",
+      "sha256": "6f64f633753e06a44a2c1b1e2b09fdd098e319d4d90047a768d0c84b7fd605e0"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "37a46c6b6d3938f5ce9c94b4e1ed4fa69b4294524ea201b88a41c90fd4cae285"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "3ab94c04d24986f3af288ba1cda2c0bbddbc5a89dff097182805f54578e1ea75"
+    },
+    {
+      "path": "docs/guide/development.md",
+      "sha256": "196ad3931bc330ec9784535bffdc7821322b94a28fc0caafbdebb67fa7243937"
+    },
+    {
+      "path": "docs/guide/preview-acceptance.md",
+      "sha256": "1cdcfb5316d2a7b2be00ef08a949a8b067dfb8c9ae7b964c3685bccb6b039a02"
+    },
+    {
+      "path": "docs/guide/releasing.md",
+      "sha256": "f0e429f6d5f5a692451ea6ef455ae35c1ddb79a1e3e63fe4887fc11c598b8956"
+    },
+    {
+      "path": "docs/guide/usage.md",
+      "sha256": "fea7f804f0b8163f695df55ae97c29770f2fae48701c8f87c75bd44946138b3c"
+    },
+    {
+      "path": "docs/images/README.md",
+      "sha256": "699a95f2fe75d5c8c110e0c53649bcea5cee56793dbbc1d75a2075739ce55795"
+    },
+    {
+      "path": "docs/images/device-setup.png",
+      "sha256": "9f4b66a33e4ea3747763e4d358422423b8d1e028354e73474f120a43fc1175a1"
+    },
+    {
+      "path": "docs/images/inspector.png",
+      "sha256": "67f066dd3c2c7b49518029204eeea1cff92d13cf971b0d1779960c205777e29e"
+    },
+    {
+      "path": "docs/images/lens-icon.png",
+      "sha256": "357864133296a8054650d4fbfa853a32d3c61dc1307d9397d0d0b5c3117de90a"
+    },
+    {
+      "path": "docs/images/request.png",
+      "sha256": "e021c9d0acfe0bba79cd158ef5bbc6e428ca9a4019df85253b1d722fb5d6dce2"
+    },
+    {
+      "path": "engine/README.md",
+      "sha256": "793b95673a73e519e95710cee39f559ef8379005385195a4ed3de96c3bc79d56"
+    },
+    {
+      "path": "engine/access_policy.py",
+      "sha256": "0cc9936bb7681071bff6cf953e08364e8f125f1b5189c9463c55a2dcd7472064"
+    },
+    {
+      "path": "engine/bounds.py",
+      "sha256": "f1b4513fc977a0d33e083dd7dfd330a7724db44456cede1a69d978a5153fa707"
+    },
+    {
+      "path": "engine/breakpoint_edit.py",
+      "sha256": "ec745a90bfd07a5848aa460fabdfb8b9aabd3f0ec7ff2212c9adf3416b21084c"
+    },
+    {
+      "path": "engine/certificate_inputs.py",
+      "sha256": "c1e75ed3ec5b71d7008ea6e90fff41c0dcce9bcb1d627cc262c9876c47a0ec3f"
+    },
+    {
+      "path": "engine/client_certificates.py",
+      "sha256": "1749b5044063e7b4a5e8207532f2136fdc263ee6afd722e164f5ee174f65d2fe"
+    },
+    {
+      "path": "engine/client_connection.py",
+      "sha256": "f8b5d38922c6c8df8587c024bc8028dab5b1327d5875249c8684cf6bfde352f7"
+    },
+    {
+      "path": "engine/connect_tunnel.py",
+      "sha256": "cce26762be1102c995f74c169514c946583102586459d44bf6f4ff9fdd158ea0"
+    },
+    {
+      "path": "engine/endpoints.py",
+      "sha256": "f936e8fb114ad6f0bd75d0e6061eeea4c070f404891b5374eb0b3058303da705"
+    },
+    {
+      "path": "engine/engine.py",
+      "sha256": "4a35022177a7ee191b6795c8501bfb463eef7bcee949407bb3b4cfaa69cdfea7"
+    },
+    {
+      "path": "engine/forwarding.py",
+      "sha256": "39b5ffc1d8cf84d9e36049a5b56b48c8e55399b240abb51e95ca32cba8fcc642"
+    },
+    {
+      "path": "engine/har.py",
+      "sha256": "b7084760d83788d0421ac7b08637108b86a0dfe31d02a110b242cbb8b420d80c"
+    },
+    {
+      "path": "engine/har_metadata.py",
+      "sha256": "49aed5a5c3fdc253f87285fe68abe79b6eb3d01e84d503009db24fa274488e67"
+    },
+    {
+      "path": "engine/har_request.py",
+      "sha256": "a415ef7b83c8dd7b799d28dc8d2bc83c342afc3e2a0f9b6db720f99a74b8364a"
+    },
+    {
+      "path": "engine/http_headers.py",
+      "sha256": "9a2c14ca02bea9a6f525f41107e0f9bb1ce4f3f088833de64433e9dbbb41c942"
+    },
+    {
+      "path": "engine/http_method.py",
+      "sha256": "9f23355b31319d75cbed61a2d5fff0b293b98459adb8b4cff3b86cc6a9b7c750"
+    },
+    {
+      "path": "engine/http_urls.py",
+      "sha256": "8edaa61a0c886b7a616c0567f9a5208ec81a43cf05303432d09d7f3db6808e75"
+    },
+    {
+      "path": "engine/local_mapping.py",
+      "sha256": "cdd1606d58192b7cd5a64282397421e92615d80f048606c079b374d9f555a4ff"
+    },
+    {
+      "path": "engine/message_edit.py",
+      "sha256": "b6e8535384e2fda94e07fa49b3db7bccc1042a6a8f0c41de9e0daa437c7e9338"
+    },
+    {
+      "path": "engine/native_json.py",
+      "sha256": "2913d1f4d08dd44ab9795d4d2b9acda9e7b457d0963406ba62dee29f9c6da0c2"
+    },
+    {
+      "path": "engine/network.py",
+      "sha256": "89ed6a8e4d7b459bb6ebfc09e9d7e8d2ca2fb7bdf7e55b62d4e01f00fc1ab100"
+    },
+    {
+      "path": "engine/outgoing.py",
+      "sha256": "aab376c80c58ea9b29ec2d0fc4082d1ec94c721de65f0725449f5ab4441a0ed4"
+    },
+    {
+      "path": "engine/outgoing_transport.py",
+      "sha256": "32041cda0a18da61bb6a990b405dc3bdb99f3452356ba321a6e09c4b79f2ea86"
+    },
+    {
+      "path": "engine/owned_commands.py",
+      "sha256": "d793959964249b5184f40098c13281a60129bde6f8a503140279c68a61dcc806"
+    },
+    {
+      "path": "engine/peer_process.py",
+      "sha256": "129fe7eef15e03a3603ead8924b4f38a168ea7e82b8bc717e35ea18392537136"
+    },
+    {
+      "path": "engine/persistence.py",
+      "sha256": "29318696049848b4828160f02daca867ed17c7a95983db078be440f9c15df83e"
+    },
+    {
+      "path": "engine/public_bootstrap.py",
+      "sha256": "fdcc14ec148aeb6bf01cf2ad24e446b9628350c1ad695c4bb3c1e176d2a4d4b9"
+    },
+    {
+      "path": "engine/remote_mapping.py",
+      "sha256": "f3cfea366a7687ae8d9b58f8ba937dbd01c74c53f97c1335b44eb966f62d1711"
+    },
+    {
+      "path": "engine/requirements.lock",
+      "sha256": "da2d12bba65c9db8d71e2908e15881f9f5f1d85d1a9cfa842069a43b64ca56c0"
+    },
+    {
+      "path": "engine/requirements.txt",
+      "sha256": "364dac8034c2cc54bbe9dd23e6101bc2fdf5470c888bfa9e4fb967e72809dbf7"
+    },
+    {
+      "path": "engine/rewrite.py",
+      "sha256": "87ede2da6840b5765d236ff9aca6676fe301180be79ee60e5f9fff18d1b6775c"
+    },
+    {
+      "path": "engine/rewrite_sets.py",
+      "sha256": "c6a79b0e10ab58f46577602334b2878261349e53b98a09725eaa9077fa69ce4a"
+    },
+    {
+      "path": "engine/rewrite_text.py",
+      "sha256": "450956a500d8b609f666ff4b3a30548113dde9122fea8fa30381c56983046614"
+    },
+    {
+      "path": "engine/routing.py",
+      "sha256": "732d2e5a8031d7198aaf07095086a64f6e19c223ed859a13cb309aee6bb68842"
+    },
+    {
+      "path": "engine/sdk_connections.py",
+      "sha256": "f3f4df7075af9884dd232685d4da0f17447a51dda0d3b8a9a8f12cd84ca0c448"
+    },
+    {
+      "path": "engine/sessions.py",
+      "sha256": "c7980fbf9285a5ffbc9ac5d6823b5fea5ae331a99800d5e8bc8e73f16d6b94d6"
+    },
+    {
+      "path": "engine/smoke.py",
+      "sha256": "e57865d4c1a2fc0506ce1b38723b7d61ba23d992f61db12954221d6570fdd89b"
+    },
+    {
+      "path": "engine/tcp_capture.py",
+      "sha256": "a7cbb6c265a91113a85509a60952cedc02ad8fe5fde3ebbfb4f673ce8c24c8d8"
+    },
+    {
+      "path": "engine/test_access_policy.py",
+      "sha256": "3d0258d4201b571638fd1f3b4e78cb5678e71c0b4cc41f3d216d1f3d1ce0b9f3"
+    },
+    {
+      "path": "engine/test_breakpoint_edit.py",
+      "sha256": "1070e6509649dc3094d9e3d0c38a48ab37b8cae36c14bd481ec7feabba594eae"
+    },
+    {
+      "path": "engine/test_clear_transactions.py",
+      "sha256": "5692bbff697a3acead0e27041803e2ca102fa35ed3a753236049d624499ffd5b"
+    },
+    {
+      "path": "engine/test_client_certificates.py",
+      "sha256": "da8176a43f2ddf63f2cfcc951f75a1e85f32ecd6284b4c104e3f954d7d61bcda"
+    },
+    {
+      "path": "engine/test_client_connection.py",
+      "sha256": "0a7b3ff6cb817b2b2b57681b1c758eedec4b5ba9da7b531b0d5931d1f46ff517"
+    },
+    {
+      "path": "engine/test_connect_tunnel.py",
+      "sha256": "8e42a65590b93b13ed615153ab47e87ff5444426e7454ffa6b4208fe82ae67bd"
+    },
+    {
+      "path": "engine/test_engine.py",
+      "sha256": "db0174fe80dc1bfdbd8f067aee5ddd59ec2d6abd2b70144064d498f572667b38"
+    },
+    {
+      "path": "engine/test_forwarding.py",
+      "sha256": "f554a54d5800e4026716147298fd49e75dfa8d84a39b809913ca4ff81b9a4565"
+    },
+    {
+      "path": "engine/test_har_metadata.py",
+      "sha256": "ed4903a7ef07ee7a41786b74440afb32d99fb0ce8770f46d373d36dc54d4afeb"
+    },
+    {
+      "path": "engine/test_har_request.py",
+      "sha256": "976c8d777b4297bde53534b61ebe5b03c282b2b82e9cb8418fff60079ae973a0"
+    },
+    {
+      "path": "engine/test_http_headers.py",
+      "sha256": "9da91745d2f8c5ac7641ec0710f1735a9ba4aa24718cc19faf56182d37c27f51"
+    },
+    {
+      "path": "engine/test_http_method.py",
+      "sha256": "ee0e1fc11e678aeaa703af37734ea89dbe0673a7bbe748a6a23ec7e82360c738"
+    },
+    {
+      "path": "engine/test_http_urls.py",
+      "sha256": "2cc9e780a6e9acb4122ccaa2610377f7c77ef7e1e4a411f137dfd2e2a0f684de"
+    },
+    {
+      "path": "engine/test_lan_access.py",
+      "sha256": "da275bbde3295528a64efeac27e7b9fd26d7345a5df92e4b47ea29d989744af7"
+    },
+    {
+      "path": "engine/test_local_mapping.py",
+      "sha256": "13c3838ef1eb1222fac01964078c622f5b3b3b6231c73dd03c2d15b662f0ebd3"
+    },
+    {
+      "path": "engine/test_native_control.py",
+      "sha256": "eb66ff4988eace29b91d7998aae24004ac98fc44284f9c642730578a1807ae0b"
+    },
+    {
+      "path": "engine/test_native_json.py",
+      "sha256": "3e9fe7915bb22a8409c158819cfd52ff4030ae5dcc4e0b44e0acac7952c9fa29"
+    },
+    {
+      "path": "engine/test_outgoing.py",
+      "sha256": "99853610225f6485ba0ae60fd1413af1063eb03ff4e950a54a79e4833b48e635"
+    },
+    {
+      "path": "engine/test_outgoing_transport.py",
+      "sha256": "4c161ae2ac4de6b4e7a4bd3827e68e55f21eb5dbe22c9b8f5da3928b6a5394b0"
+    },
+    {
+      "path": "engine/test_peer_process.py",
+      "sha256": "fec949b6690fe0410105946994ef188abbd61a4bc0a1cf2a727636d5c8f8da02"
+    },
+    {
+      "path": "engine/test_public_bootstrap.py",
+      "sha256": "04a07ac0d831cdbebec9c07831e1df3a9313f0a60de5f09c2eb119ffd8a289c5"
+    },
+    {
+      "path": "engine/test_remote_mapping.py",
+      "sha256": "baf4cc1559db78488d3768277af50b2db503d92d634e1c628dcb6da2a4e535ae"
+    },
+    {
+      "path": "engine/test_rewrite.py",
+      "sha256": "2c68c8946076b74ea6d1a4bf10e051943e7246fb3a389aa3778501432da0a11e"
+    },
+    {
+      "path": "engine/test_rewrite_patterns.py",
+      "sha256": "7b0e591d419f49d7ab6dd1f7ee0a16f367d1e9b9ac1bc2dd0b44e5692ba5d83a"
+    },
+    {
+      "path": "engine/test_sdk_connections.py",
+      "sha256": "6656c2745b9ca878c91f99f49ec8808f75eb3fee81a97cb855c3fd13e7c22945"
+    },
+    {
+      "path": "engine/test_session_lifecycle.py",
+      "sha256": "f75b436414882d4df660993339e89f4ba7674f184265ae344e0bce833ed53cad"
+    },
+    {
+      "path": "engine/test_sessions.py",
+      "sha256": "14df187b3760e216465a65dd73397beb6a832b14b14757b804fa15900cefabea"
+    },
+    {
+      "path": "engine/test_startup_control.py",
+      "sha256": "687781244cbcaea0a19578a13bfdd3d63aaa54b29590a5e305429d115e163925"
+    },
+    {
+      "path": "engine/test_tcp_capture.py",
+      "sha256": "73b9e84ad640c327b8cd06f0a0180b5c237e8e718adce536c8b35d511e0e965d"
+    },
+    {
+      "path": "engine/test_udp_capture.py",
+      "sha256": "c9e1c2aaedd8d218eed57453f8bb4866be416a0ebdd1b61ce15c7a4bfd269bc5"
+    },
+    {
+      "path": "engine/test_udp_forwarding.py",
+      "sha256": "d70c90b60f8d4aaea91673f3a647c73f5b8fb7873513e38bee8fa805ca026265"
+    },
+    {
+      "path": "engine/test_websocket_capture.py",
+      "sha256": "00965da0753298a7a340d2de902ee4ec78e237affbf105fd1489967b4e1b3c05"
+    },
+    {
+      "path": "engine/test_workspace_revision.py",
+      "sha256": "4f87c89ef24be2f11569d4af976813b1af4778a946bc3c5bd22573dba6ad8f19"
+    },
+    {
+      "path": "engine/udp_capture.py",
+      "sha256": "1441da7ffa3b5886d8825d7aff6c7b15a4ed890a82b10b44e52caa93608aabc7"
+    },
+    {
+      "path": "engine/udp_forwarding.py",
+      "sha256": "22d81001dc80813919436278a01aca9abd35510fb39f71a3a47ef7fef45d42e8"
+    },
+    {
+      "path": "engine/upstream_proxy.py",
+      "sha256": "aa6d56f22e112918903ba02d7c31900d2939d2c00eae36e9ff5f1ce53f189094"
+    },
+    {
+      "path": "engine/upstream_tls.py",
+      "sha256": "eb6900c0d86c33be56c4dadd9babee77b9ba17d8d8e8028b7e42f9820221c28b"
+    },
+    {
+      "path": "engine/websocket_capture.py",
+      "sha256": "9d02814a41792440c385d7800904331d31d81d8d8f608a7dbbe5b58d08470fd1"
+    },
+    {
+      "path": "engine/workspace_revision.py",
+      "sha256": "245bbf4feeb7dd689ebb12179f6fef340833d45bab9cefff599abe221e8165f7"
+    },
+    {
+      "path": "scripts/bootstrap.sh",
+      "sha256": "4b1a4057153bae38bb4476b4bbb0cb5c3ee049d3635c73c50b167257edfae6ab"
+    },
+    {
+      "path": "scripts/build-android-probe.sh",
+      "sha256": "843238d9c3d6778fa6a119116d185dbb918984f639d929ec29eb3b58f2cd1a19"
+    },
+    {
+      "path": "scripts/build-app.sh",
+      "sha256": "e0a9bf73c33853fd71438496a20e198974daa7fd08987f6cebf4a5575116100f"
+    },
+    {
+      "path": "scripts/export-source.py",
+      "sha256": "af2c75beb0a518ee6d59ebcb1a7a7fd05e4feffee89123af55c313f7041a62ce"
+    },
+    {
+      "path": "scripts/make-icon.swift",
+      "sha256": "093516d843f9d992ff4c17cb52dd1cef59b7281c855e537a7cf2f31719578c01"
+    },
+    {
+      "path": "scripts/package-app.py",
+      "sha256": "82d6c0a943aaf4ceb01bf9d9a5050fba6b0963bbeedecdc423c9a4597d862a2b"
+    },
+    {
+      "path": "scripts/package-dmg.py",
+      "sha256": "1a270e1c9857821431736ab2e9e5ae7646aa9b25b0b4aa7932c2bc6a3d2b3ab8"
+    },
+    {
+      "path": "scripts/test-android-proxy.sh",
+      "sha256": "6453e9eb8b67b5e984e4cfd744ae682211d6a9f1383de904c6be66763b959cfa"
+    },
+    {
+      "path": "scripts/test-apple-proxy.sh",
+      "sha256": "31fa92805761fbb055b0a912c4c05faa81cbbfd6036484ba875dd48ff6385361"
+    },
+    {
+      "path": "scripts/test-onboarding.sh",
+      "sha256": "0f7822142dd16549fe2bee44ef188a032c77933253ae565d01ef19a604ee49be"
+    },
+    {
+      "path": "scripts/test-workspace-files.sh",
+      "sha256": "12e4215538eb585b8b7b81d5edb289c2850f7b9cb2580fc4e55eae45d2c118ad"
+    },
+    {
+      "path": "tests/access_store_smoke.swift",
+      "sha256": "bf8ac378d70cb2bb36407151ef5eda5a7fcb2e11de7548d3df8d9f8b5a23156c"
+    },
+    {
+      "path": "tests/android-proxy-client/AndroidManifest.xml",
+      "sha256": "55d4922ca3174d7ea36b6b910ab1b47dc8bc2a2f5f478fee6bcc50fdf738b69e"
+    },
+    {
+      "path": "tests/android-proxy-client/MainActivity.java",
+      "sha256": "d37cc569d9079f094dfbc62de843fc43aecb891febec6ea7cf7361cc7d0aba19"
+    },
+    {
+      "path": "tests/apple-proxy-client/AppleProxyProbe.swift",
+      "sha256": "66c70766fb1de1f8f981f0356ef753cd2c4c990944abcc81b83ecf926e825b54"
+    },
+    {
+      "path": "tests/apple-proxy-client/MacMain.swift",
+      "sha256": "464a3d2f95ac833de4a7da444f2df4aa77837a2d80a3dda66c9e95561866ee9d"
+    },
+    {
+      "path": "tests/body_format_smoke.swift",
+      "sha256": "4cb4f6b3b8032707c20fd98eec86a854ec21a615cbf9f101324c1b9b10f7f000"
+    },
+    {
+      "path": "tests/breakpoint_store_smoke.swift",
+      "sha256": "519692c931377df8d3c850c5600b641b4bbb87252fb0931937135372f9a5c564"
+    },
+    {
+      "path": "tests/clear_store_smoke.swift",
+      "sha256": "71a8d1a051a58d37b5c4c56fe13d618754d5303403ca9a28ec5959bdee930234"
+    },
+    {
+      "path": "tests/compose_store_smoke.swift",
+      "sha256": "35b841c80889fc72357c1701e96a28680c1a12734e86e4ce60f6863c36a682ab"
+    },
+    {
+      "path": "tests/connection_deadline_fixture.py",
+      "sha256": "0f0983a62fdb5084791ea06b3402f95c566ac1fe95f040e6c1a58ab705a11437"
+    },
+    {
+      "path": "tests/connection_timeout_store_smoke.swift",
+      "sha256": "fc8bb7a59e9aceac3e7dafe046473ce5aaf79976f0f4769c5b54f3121db34a1f"
+    },
+    {
+      "path": "tests/fixtures/late_outgoing_engine.py",
+      "sha256": "9fb3d40542501aa862aa191361119cbaeda68a7a8534ce9f404f37e64385809f"
+    },
+    {
+      "path": "tests/forward_ranges_smoke.swift",
+      "sha256": "97c3b7b12c104e2f59115e10e1283370631d7ccffea79345581531e114b5f7c6"
+    },
+    {
+      "path": "tests/forward_ranges_store_smoke.swift",
+      "sha256": "a3a3c640a53fb964a72055e8a118815fef60a8ae355163d1822bf3025c508bfb"
+    },
+    {
+      "path": "tests/lan_access_smoke.swift",
+      "sha256": "7b8aea82566639c7b4480cbe61dcea6c020c9c9e035773ea3b94d615838e29a0"
+    },
+    {
+      "path": "tests/map_remote_rules_smoke.swift",
+      "sha256": "31f2a7bbe9b08dd8bae7a3b6ff370cd391fc4c6ee196fc8a875ad5d8070d4c61"
+    },
+    {
+      "path": "tests/multipart_detail_smoke.swift",
+      "sha256": "2c14c3854818fba3469c4c2307fb3a272f97b652f07e002e963a29e166ab8a57"
+    },
+    {
+      "path": "tests/multipart_format_smoke.swift",
+      "sha256": "462fd9208e540c6d7bacd35ea6d77d54f63b587b919807068f18a2bc1655f6b3"
+    },
+    {
+      "path": "tests/native_http_bytes_smoke.swift",
+      "sha256": "73f64abfd387c83b55ab263064ff4ebc029da7a8b15980464e77f46ac24ca465"
+    },
+    {
+      "path": "tests/native_json_store_smoke.swift",
+      "sha256": "0453878f4d0de8fa48cd14bac4d57ddc8d5d950e46d12678e036eeb9fbb8db8f"
+    },
+    {
+      "path": "tests/native_upstream_proxy_smoke.swift",
+      "sha256": "7b7b167a2639707f26b18111bec042d09b869d46d253495121e4a1bd89ca68c2"
+    },
+    {
+      "path": "tests/onboarding_store_smoke.swift",
+      "sha256": "4714c05c814a7f70bf5ef22928477f0f93c0a5811bfeec6d80e5c2653b84fc80"
+    },
+    {
+      "path": "tests/quit_store_smoke.swift",
+      "sha256": "9bf6fd9c68c6af5fdb8622992bcc6efc249cea6a10a0022d4cf23786ec59f39c"
+    },
+    {
+      "path": "tests/rewrite_store_smoke.swift",
+      "sha256": "256a4e518d19508f7413071fb595cb1f90d0e40ef048847efab999f565565300"
+    },
+    {
+      "path": "tests/rule_save_store_smoke.swift",
+      "sha256": "a034bcce3b4d21592f883ecec5398eb48a8b4fdd9c39644dfee6b4b9682a9841"
+    },
+    {
+      "path": "tests/session_artifacts_smoke.swift",
+      "sha256": "219299cb5d81a2960f75fdf2bc59a460ab267f457333305ac96402d09090b502"
+    },
+    {
+      "path": "tests/session_lifecycle_store_smoke.swift",
+      "sha256": "ddb6797b62ff1d9d893510a9d6ba64012302c69217cee877f84f01732b35a01c"
+    },
+    {
+      "path": "tests/startup_store_smoke.swift",
+      "sha256": "0b9af4799a5ff698fb0cda372b53ba427bffd3ca1f421dbe06516973ea1b3165"
+    },
+    {
+      "path": "tests/store_engine_smoke.swift",
+      "sha256": "642ede8c137d174af9dbf92e112bf13906fb367ff7f2b1e0f456b58d20833390"
+    },
+    {
+      "path": "tests/system_proxy_smoke.swift",
+      "sha256": "b5aa944367e567bcc614e68adc8146483aaa20a0624f1028d46efc0e8d28c610"
+    },
+    {
+      "path": "tests/tcp_store_smoke.swift",
+      "sha256": "3fa5b57bef423f0877469b9f23cbdfa72440010074241d0d300d61e1c8d6f590"
+    },
+    {
+      "path": "tests/test_access_lists.py",
+      "sha256": "f0537ff86770e2d7393a9ed851eb6867491c948e96821615cf4ad7e64ea0f5b5"
+    },
+    {
+      "path": "tests/test_android_proxy_client.py",
+      "sha256": "df556ff818e7db4a97f99dc176843fd7d292c42111228e17bd0c7b47098e56e6"
+    },
+    {
+      "path": "tests/test_apple_proxy_client.py",
+      "sha256": "80626a886e8cbabe08c19b1da206ebfe72a76367d11ea20822b1bf7da636ccc9"
+    },
+    {
+      "path": "tests/test_breakpoint_deadlines.py",
+      "sha256": "ce41cb6e469fe6879c765fd52281f7d8759a818c202aaf0293850916987bec46"
+    },
+    {
+      "path": "tests/test_breakpoint_editing.py",
+      "sha256": "218ba1dfccdbce4647b7d5c806b32bf082e04a45ddda86fe25fa90657c568f90"
+    },
+    {
+      "path": "tests/test_clear_workflows.py",
+      "sha256": "519064bf1e71a95bdd0ab747661b7d6062030b05d5f2fedc86a93bc566918f0e"
+    },
+    {
+      "path": "tests/test_client_certificates.py",
+      "sha256": "0bdc8b30ddfdb3c0cae7b130c097e21f2fb8f9b798f4e1d8f2a04a53e8083fa7"
+    },
+    {
+      "path": "tests/test_client_connection.py",
+      "sha256": "eb914d73743d8e5fa2a66800db864e3317f0a40b652ee9d6971a4f57f8f99c7b"
+    },
+    {
+      "path": "tests/test_compose_requests.py",
+      "sha256": "a854a8b3acd5150e7181cac8de53417f8a2a6a42bca3c544b8c3252d7a1f89fb"
+    },
+    {
+      "path": "tests/test_connect_tunnel.py",
+      "sha256": "f83182124e8e74ff0e1265bd2d1837d3d94fa1064fa9aa563ccddaf1423e2efa"
+    },
+    {
+      "path": "tests/test_connection_deadlines.py",
+      "sha256": "fdc7f0a93593b7aaa758c1476d77635dae5477a5b93ed48751d5ab0486123f7b"
+    },
+    {
+      "path": "tests/test_e2e.py",
+      "sha256": "52aa4c51a1da65481cbd6dbfde75e0c48f0dd26452e4ae857ffe8ad27713bbc4"
+    },
+    {
+      "path": "tests/test_eof_response.py",
+      "sha256": "197cd01bd292ecb46bb5eb89069a769e7868744473979e6f229a6824bb311808"
+    },
+    {
+      "path": "tests/test_forwarding_ranges.py",
+      "sha256": "8009878027e38ef536fd647225f6fa3dd5c0bd446771ddc703bdd9a4553bfeff"
+    },
+    {
+      "path": "tests/test_har_fidelity.py",
+      "sha256": "9fb96afc040fb0550925062d499c0b95ec187a3d55eaafda5212df1cd7a156ed"
+    },
+    {
+      "path": "tests/test_har_request_facts.py",
+      "sha256": "8c059c73dea18a1bbb071b8f8ba64d184588251e8423b18150e109a6dd7e8edc"
+    },
+    {
+      "path": "tests/test_http_controls.py",
+      "sha256": "c34e49a567538cb79ff172a317a83438c03df031b7d8afeb4b897353e24f0436"
+    },
+    {
+      "path": "tests/test_lan_proxy.py",
+      "sha256": "b93068d4c55346ad238f3ea3f570aa3100567bf41d84e351279ae54da2deb686"
+    },
+    {
+      "path": "tests/test_map_local.py",
+      "sha256": "92754619cb490c85f75ccbaf433b8031bc0c8a56ce91deb531ac51169569b70d"
+    },
+    {
+      "path": "tests/test_map_parts.py",
+      "sha256": "edc47051c0ec3d68423d43a630a795a8fe733f640fb8c0d87eee781b3cc55509"
+    },
+    {
+      "path": "tests/test_map_remote.py",
+      "sha256": "1491c29c2f796294c2845feb10dda883a83313b1c8505eb209d89ad580dd125a"
+    },
+    {
+      "path": "tests/test_multipart_preview.py",
+      "sha256": "d4a8c978f69034374f57d4e480d3837ca9ee474c0e95312108e8bc7ed0087f56"
+    },
+    {
+      "path": "tests/test_native_json_protocol.py",
+      "sha256": "e9ddd1290a9595ea86ca09b4d64bf46524bcf04a89234e1cddbe6a729826e5d3"
+    },
+    {
+      "path": "tests/test_network_features.py",
+      "sha256": "a8d8ed29658bd2d5bb283778f44e92cd37343b44b9e2856f5454dcac57ca8a24"
+    },
+    {
+      "path": "tests/test_outgoing_identity.py",
+      "sha256": "7f50871bd4456fe4ab80d31005a64e6e9a585408370f80634063d2f30cdeb86c"
+    },
+    {
+      "path": "tests/test_outgoing_targets.py",
+      "sha256": "6e82087fbf51f89c8e0c530456109dd59f2d209392f2adaccee01b4a065e5ae5"
+    },
+    {
+      "path": "tests/test_packaging.py",
+      "sha256": "4811af4c34ccfe41499e347a2125f5b9ce2ae9cc3084e9384d0c2c68138a9502"
+    },
+    {
+      "path": "tests/test_pattern_rules.py",
+      "sha256": "ca197b50cbfe976433fbc122eceba2016d8369b0499e0ff37aad6195aca40cab"
+    },
+    {
+      "path": "tests/test_peer_process.py",
+      "sha256": "706e42f05bdbb318893fefd487e4843bf871def77b44ed1c91374bcb7cc5c9ab"
+    },
+    {
+      "path": "tests/test_protocols.py",
+      "sha256": "513b6436722c8e3987aea72f7a3b9de309669395ce9f30e664458083eeb99a59"
+    },
+    {
+      "path": "tests/test_rewrite.py",
+      "sha256": "2bee96701a137b64ebe7a51c63da971a2cb3244da09871128cc703d09f414fd1"
+    },
+    {
+      "path": "tests/test_session_lifecycle.py",
+      "sha256": "3ef17265af5da1787e4e721bc895b4a698d870cb04cdb8fa249d51c7825cafd6"
+    },
+    {
+      "path": "tests/test_session_workflows.py",
+      "sha256": "54044743ba65c5aa7026b2b84d3eb188ecdc1548d7163ccb59f2bb44616ac186"
+    },
+    {
+      "path": "tests/test_stopped_session.py",
+      "sha256": "253b445bb1f3e3151b2b6a2503800f9061b926fc26636f516fb1976e3e8429f8"
+    },
+    {
+      "path": "tests/test_tcp_forwarding.py",
+      "sha256": "911dfdc26a0f8937cf9979eaac833b75f38ade79c5ce00ad37fac6ee181bb3b6"
+    },
+    {
+      "path": "tests/test_udp_forwarding.py",
+      "sha256": "f0200c68c52c07d03a0222b99b2a98a9746e983b99120a70edfd782dd8840be0"
+    },
+    {
+      "path": "tests/test_unavailable_bodies.py",
+      "sha256": "f06ac0257582936e207d6e2a43839063c39957078a52286d513b9ce5dda10631"
+    },
+    {
+      "path": "tests/test_upstream_proxy.py",
+      "sha256": "3d0718ef34b5d8c7a73831f22c3467a589a3733d2f605d0857adee0764668f6a"
+    },
+    {
+      "path": "tests/test_websocket_capture.py",
+      "sha256": "fb9948fb79d03cb4d0b6e36ee5271a30386c0a64f3a0b9b8bbff440b85226408"
+    },
+    {
+      "path": "tests/udp_store_smoke.swift",
+      "sha256": "7bc812aad50d973e98da8b457987f3516071a231d82d61d25d43f83c3a6336d0"
+    },
+    {
+      "path": "tests/unavailable_body_store_smoke.swift",
+      "sha256": "00313c4c37014ca3447178f0d879500f8c31c3044f9f783204df18843dbb9b85"
+    },
+    {
+      "path": "tests/websocket_detail_smoke.swift",
+      "sha256": "d7b7c5430d9201dedb09bb60aab325409f41686031480c817020e59c94f97699"
+    },
+    {
+      "path": "tests/websocket_store_smoke.swift",
+      "sha256": "cca1bf031c83129696e9331b03b30bf735d64c3f09182f5c53da06040238b395"
+    },
+    {
+      "path": "tests/workspace_file_store_smoke.swift",
+      "sha256": "510e776b4e00bbeebaf1792ea8cba89f6334f4d6f4f7d3878f5e34c919a9b3a0"
+    }
+  ]
+}
