@@ -72,7 +72,7 @@ struct LensWorkspaceView: View {
                     .font(.caption).foregroundStyle(store.startupIssue == nil && systemProxy.error == nil ? Color.secondary : Color.red).textSelection(.enabled)
             }
             Spacer(minLength: 10)
-            Button("新手引导") { connectionPage = .welcome; showConnection = true }
+            Button("Get Started") { connectionPage = .welcome; showConnection = true }
         }.padding(.horizontal, 14).padding(.vertical, 9)
     }
 
@@ -80,7 +80,7 @@ struct LensWorkspaceView: View {
         if store.isStarting { return "Starting capture proxy…" }
         if let issue = store.startupIssue { return issue.title }
         if !store.isRunning { return "Proxy stopped" }
-        if let address = store.activeLANAddress { return "手机代理已就绪 · \(address):\(store.port)" }
+        if let address = store.activeLANAddress { return "Device proxy ready · \(address):\(store.port)" }
         if systemProxy.isBusy { return "Checking Mac proxy setup…" }
         if Int(store.port).map({ systemProxy.routing?.usesLens(port: $0) == true }) == true { return "Mac HTTP & HTTPS proxy points to Lens" }
         return systemProxy.routing == nil ? "Mac proxy status unavailable — review setup" : "Mac traffic is not connected to Lens"
@@ -90,12 +90,12 @@ struct LensWorkspaceView: View {
         if let issue = store.startupIssue { return issue.message }
         if let error = systemProxy.error { return error }
         if store.isRunning, store.activeLANAddress != nil {
-            return "在手机 Wi-Fi 中填写此代理，浏览器打开 http://lens.invalid/ 验证连接。HTTPS 还需证书信任；局域网已就绪不代表手机已接入。"
+            return "Set this proxy in the device Wi-Fi settings, then open http://lens.invalid/ to verify the connection. HTTPS also requires CA trust. A ready LAN proxy does not mean the device is connected."
         }
         if store.isRunning, Int(store.port).map({ systemProxy.routing?.usesLens(port: $0) == true }) == true {
             return "Apps using the system proxy can connect. HTTPS bodies also need trusted Lens certificates and matching SSL hosts."
         }
-        return "选择要抓包的 Mac、Android 或 iPhone，按新手引导完成代理和 HTTPS 设置。"
+        return "Choose this Mac, Android or iPhone, then follow Get Started to set up the proxy and HTTPS."
     }
 
     private var sessionBar: some View {
@@ -197,17 +197,17 @@ struct LensWorkspaceView: View {
                 ContentUnavailableView {
                     Label(store.flows.isEmpty ? "Traffic starts here" : "No matching requests", systemImage: store.flows.isEmpty ? "point.3.connected.trianglepath.dotted" : "line.3.horizontal.decrease.circle")
                 } description: {
-                    Text(store.flows.isEmpty ? (store.isStarting ? "代理正在启动，请等待就绪提示。" : !store.isRunning ? "先选择要抓包的设备，引导会帮你启动代理并完成连接。" : !store.recording ? "代理正在转发，但录制已暂停。恢复录制后，新请求才会出现在这里。" : store.activeLANAddress != nil ? "手机需使用 Mac 的局域网代理。先在手机浏览器打开 http://lens.invalid/，再按引导配置 HTTPS。" : "代理已在本机启动；手机尚需开启局域网入口，Mac 浏览器则需接入系统代理。") : "Try another filter or choose All traffic.")
+                    Text(store.flows.isEmpty ? (store.isStarting ? "The proxy is starting. Wait for it to become ready." : !store.isRunning ? "Choose a device to inspect. The guide will help you start the proxy and connect it." : !store.recording ? "The proxy is forwarding traffic, but recording is paused. Resume recording to see new requests here." : store.activeLANAddress != nil ? "Your device must use the Mac LAN proxy. Open http://lens.invalid/ in its browser, then follow the guide to set up HTTPS." : "The local proxy is running. Enable LAN access for devices, or connect the Mac browser through the system proxy.") : "Try another filter or choose All traffic.")
                 } actions: {
                     if store.flows.isEmpty {
                         HStack {
                             Button("Android") { connectionPage = .android; showConnection = true }
                             Button("iPhone / iPad") { connectionPage = .ios; showConnection = true }
-                            Button("这台 Mac") { connectionPage = .system; showConnection = true }
+                            Button("This Mac") { connectionPage = .system; showConnection = true }
                         }
-                        if store.isRunning && !store.recording { Button("恢复录制", action: store.toggleRecording) }
+                        if store.isRunning && !store.recording { Button("Resume Recording", action: store.toggleRecording) }
                     } else {
-                        Button("清除筛选") { store.search = ""; store.selectedHost = nil }
+                        Button("Clear Filters") { store.search = ""; store.selectedHost = nil }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -279,7 +279,7 @@ struct LensWorkspaceView: View {
             Button { showTCPStreams = true } label: { Label("TCP streams", systemImage: "arrow.left.arrow.right") }
             Button { showUDPDatagrams = true } label: { Label("UDP datagrams", systemImage: "point.3.connected.trianglepath.dotted") }
             Menu {
-                Button("新手引导") { connectionPage = .welcome; showConnection = true }
+                Button("Get Started") { connectionPage = .welcome; showConnection = true }
                 Button("Android") { connectionPage = .android; showConnection = true }
                 Button("iPhone / iPad") { connectionPage = .ios; showConnection = true }
                 Button("Mac capture setup") { connectionPage = .system; showConnection = true }
@@ -404,9 +404,9 @@ private struct LensInspectorView: View {
                 }.padding(16).frame(maxWidth: .infinity, alignment: .leading)
             }
         case .request:
-            if let detail = store.detail { LensMessageView(title: "Request", headers: detail.requestHeaderFields, rawBody: detail.requestBody, available: detail.requestBodyAvailable ?? flow.requestBodyAvailable ?? true, truncated: detail.requestTruncated, bodyBase64: detail.requestBodyBase64, binary: detail.requestBinary ?? false) } else { detailPlaceholder }
+            if let detail = store.detail { LensMessageView(title: "Request", headers: detail.requestHeaderFields, rawBody: detail.requestBody, available: detail.requestBodyAvailable ?? flow.requestBodyAvailable ?? true, truncated: detail.requestTruncated, bodyBase64: detail.requestBodyBase64, binary: detail.requestBinary ?? false).id(flow.id + "/request") } else { detailPlaceholder }
         case .response:
-            if let detail = store.detail { LensMessageView(title: "Response", headers: detail.responseHeaderFields, rawBody: detail.responseBody, available: detail.responseBodyAvailable ?? flow.responseBodyAvailable ?? true, truncated: detail.responseTruncated, bodyBase64: detail.responseBodyBase64, binary: detail.responseBinary ?? false) } else { detailPlaceholder }
+            if let detail = store.detail { LensMessageView(title: "Response", headers: detail.responseHeaderFields, rawBody: detail.responseBody, available: detail.responseBodyAvailable ?? flow.responseBodyAvailable ?? true, truncated: detail.responseTruncated, bodyBase64: detail.responseBodyBase64, binary: detail.responseBinary ?? false).id(flow.id + "/response") } else { detailPlaceholder }
         case .websocket:
             if let detail = store.detail { LensWebSocketView(store: store, detail: detail).id(flow.id) }
             else { detailPlaceholder }
@@ -444,6 +444,8 @@ private struct LensMessageView: View {
     @State private var format = BodyFormat.json
     @State private var renderedBody = ""
     @State private var renderedInput: BodyRenderInput?
+    @State private var jsonPresentation: JSONPresentation?
+    @State private var headersExpanded = true
 
     private var contentTypes: [Data] { headers.filter { $0.nameText?.lowercased() == "content-type" }.map(\.value) }
     private var preferredFormat: BodyFormat { BodyFormatter.preferredFormat(binary: binary, contentTypes: contentTypes) }
@@ -454,9 +456,12 @@ private struct LensMessageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                HStack { Text("Headers").font(.subheadline.weight(.semibold)); Spacer(); copyButton(headersText) }
-                if headers.isEmpty { Text("No headers captured").font(.caption).foregroundStyle(.secondary) }
-                else { Text(headersText).font(.system(.caption, design: .monospaced)).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }
+                DisclosureGroup(isExpanded: $headersExpanded) {
+                    if headers.isEmpty { Text("No headers captured").font(.caption).foregroundStyle(.secondary) }
+                    else { Text(headersText).font(.system(.caption, design: .monospaced)).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }
+                } label: {
+                    HStack { Text("Headers · \(headers.count)").font(.subheadline.weight(.semibold)); Spacer(); copyButton(headersText) }
+                }
                 Divider().padding(.vertical, 4)
                 HStack {
                     Text("Body").font(.subheadline.weight(.semibold))
@@ -464,8 +469,9 @@ private struct LensMessageView: View {
                     Picker("Format", selection: $format) {
                         ForEach(BodyFormat.allCases) { Text($0.label).tag($0) }
                     }.labelsHidden().frame(width: 130)
-                    copyButton(renderedBody)
-                        .disabled(!available || !renderingComplete).help("Copy displayed body")
+                    if format != .json || jsonPresentation?.document == nil {
+                        copyButton(renderedBody).disabled(!available || !renderingComplete).help("Copy displayed body")
+                    }
                 }
                 if truncated {
                     Label("Preview limited to 2 MiB. Save the body for retained bytes; capture is limited to 32 MiB per body.", systemImage: "exclamationmark.triangle")
@@ -476,8 +482,14 @@ private struct LensMessageView: View {
                     Text("The capture does not include these bytes. An unavailable body is different from a captured empty body.").font(.caption).foregroundStyle(.secondary)
                 } else if !hasPreview { Text("Empty body").font(.caption).foregroundStyle(.secondary) }
                 else if renderingComplete {
-                    LensBodyTextView(text: renderedBody, title: title)
-                        .frame(height: 420)
+                    if let document = jsonPresentation?.document, format == .json {
+                        LensJSONBodyView(document: document, title: title).id(document.id)
+                    } else {
+                        if format == .json, let issue = jsonPresentation?.issue {
+                            Label(issue, systemImage: "exclamationmark.triangle").font(.caption).foregroundStyle(.orange)
+                        }
+                        LensBodyTextView(text: renderedBody, title: title).frame(height: 420)
+                    }
                 } else { ProgressView("Formatting…").controlSize(.small).font(.caption) }
             }.padding(14)
         }
@@ -489,8 +501,14 @@ private struct LensMessageView: View {
         .task(id: !available ? nil : renderInput) {
             renderedInput = nil
             renderedBody = ""
+            jsonPresentation = nil
             guard available, hasPreview else { return }
             let input = renderInput
+            if input.format == .json {
+                guard let result = await BodyRenderWorker.shared.renderJSON(input), !Task.isCancelled else { return }
+                jsonPresentation = result; renderedBody = result.text; renderedInput = input
+                return
+            }
             guard let result = await BodyRenderWorker.shared.render(input), !Task.isCancelled else { return }
             renderedBody = result
             renderedInput = input

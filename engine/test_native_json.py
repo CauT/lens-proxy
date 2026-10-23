@@ -49,7 +49,7 @@ class NativeJSONBoundary(unittest.TestCase):
 
     def test_normal_unicode_payload_is_unchanged_and_does_not_copy_large_body(self):
         message = {'event': 'result', 'value': {'body': 'ordinary body\n' * 65536,
-                   'unicode': '汉字😀é e\u0301', 'literal': r'\udcff', 'controls': '\0\x1f\x7f"\\'}}
+                   'unicode': '\u6c49\u5b57😀é e\u0301', 'literal': r'\udcff', 'controls': '\0\x1f\x7f"\\'}}
         original_dumps = json.dumps
         with patch.object(native_json, '_project', side_effect=AssertionError('ordinary body copied')), \
              patch.object(native_json.base64, 'b64encode', side_effect=AssertionError('ordinary body encoded')), \

@@ -109,7 +109,7 @@ class HARRequestFacts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'budget'):
                 restore_request_facts(facts, standard(captured()), http.Headers(), 1.25)
         facts = export_request_facts(captured())
-        facts['host'] = '界' * 400
+        facts['host'] = '\u754c' * 400
         with patch('har_request.METADATA_BYTES', 1024), patch('har_request.decode_base64', side_effect=AssertionError('must preflight')):
             with self.assertRaisesRegex(ValueError, 'budget'):
                 restore_request_facts(facts, standard(captured()), http.Headers(), 1.25)
@@ -165,7 +165,7 @@ class LegacyHARRequest(unittest.TestCase):
                 self.assertIsNone(request.timestamp_end)
 
     def test_non_utf8_and_utf8_suffix_bytes_are_preserved_without_quoting(self):
-        for suffix in ('/raw\udcff?a=\udcfe&a=2', '/é?q=值#片', '/semi;p=1?x=1&x=2#fragment',
+        for suffix in ('/raw\udcff?a=\udcfe&a=2', '/é?q=\u503c#\u7247', '/semi;p=1?x=1&x=2#fragment',
                        '/path?', '/path#', '/path?#', '?', '#', '/%FF?x=%FE'):
             with self.subTest(suffix=suffix):
                 source = {'method': 'G\udcffT', 'url': 'https://bücher.test:8443' + suffix,
@@ -200,7 +200,7 @@ class LegacyHARRequest(unittest.TestCase):
                 restore_legacy_request(source, headers, 1.25)
         with patch('har_request.METADATA_BYTES', 1024), patch('har_request.http.Request', side_effect=AssertionError('must preflight')):
             with self.assertRaisesRegex(ValueError, 'budget'):
-                restore_legacy_request({'method': 'GET', 'url': 'http://host/' + '界' * 400}, headers, 1.25)
+                restore_legacy_request({'method': 'GET', 'url': 'http://host/' + '\u754c' * 400}, headers, 1.25)
 
 
 if __name__ == '__main__':

@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP="${LENS_APP_OUTPUT:-$ROOT/Lens.app}"
 VERSION="$(cat "$ROOT/VERSION")"
-BUILD_NUMBER="${LENS_BUILD_NUMBER:-5}"
+BUILD_NUMBER="${LENS_BUILD_NUMBER:-8}"
 [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ && "$BUILD_NUMBER" =~ ^[0-9]+$ ]] || { echo "Invalid version/build number" >&2; exit 1; }
 RUNTIME="$(find "$ROOT/.python" -maxdepth 1 -type d -name 'cpython-3.13.12-macos-*-none' | head -1)"
 if [[ -z "$RUNTIME" || ! -x "$ROOT/.runtime/bin/python" ]]; then

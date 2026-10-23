@@ -15,7 +15,7 @@ class SessionLifecycleWire(SessionFixture):
     def test_named_close_copy_restores_exact_entries_and_keeps_other_session_live(self):
         self.request('/old', b'\0\xfforiginal')
         old = self.engine.flow(self.url + '/old')
-        self.engine.command('rename_session', session_id='default', name='API 中文')
+        self.engine.command('rename_session', session_id='default', name='API \u4e2d\u6587')
         current = self.engine.command('new_session')[1]['capture_session_id']
         self.request('/other', b'other')
         before = {identity: self.entries(identity) for identity in ('default', current)}
@@ -28,7 +28,7 @@ class SessionLifecycleWire(SessionFixture):
         inspection = self.directory / 'inspection'; inspection.mkdir()
         restored = EngineHarness(inspection, None, inspect_workspace=copy)
         try:
-            self.assertEqual(restored.ready['sessions'][0]['name'], 'API 中文')
+            self.assertEqual(restored.ready['sessions'][0]['name'], 'API \u4e2d\u6587')
             self.assertTrue(restored.ready['capture_stopped'])
             for identity, expected in before.items():
                 self.assertEqual(restored.command('export_har', session_id=identity)[1]['log']['entries'], expected)

@@ -40,7 +40,7 @@ final class LensDeviceSetup: ObservableObject {
         store.stop { [weak self] success in
             guard let self else { return }
             self.busy = false; self.stopping = false
-            if !success { self.takeFailure("未能停止代理，请检查当前状态后重试。") }
+            if !success { self.takeFailure("Could not stop the proxy. Check its current status and try again.") }
         }
     }
 
@@ -49,7 +49,7 @@ final class LensDeviceSetup: ObservableObject {
         error = nil
         guard !store.isRunning, !store.isStarting, !store.systemProxy.isBusy,
               !store.systemProxy.hasBackup else {
-            error = "先停止当前抓包，再启动手机代理。"; return
+            error = "Stop the current capture before starting the device proxy."; return
         }
         if let issue = LensNetworkSettingsValidation.listenerIssue(httpPort: port, socksPort: store.socksPort,
             reversePort: store.reversePort, reverseURL: store.reverseURL, tcpForwards: store.tcpForwards,
@@ -62,7 +62,7 @@ final class LensDeviceSetup: ObservableObject {
         busy = true
         store.applyRules { [weak self] success in
             guard let self else { return }
-            guard success else { self.busy = false; self.takeFailure("设置未能保存，请检查后重试。"); return }
+            guard success else { self.busy = false; self.takeFailure("Could not save settings. Review them and try again."); return }
             self.expectedAddress = address
             self.startupObservation = self.store.objectWillChange.sink { [weak self] _ in
                 Task { @MainActor in self?.completeStartIfSettled() }
@@ -76,7 +76,7 @@ final class LensDeviceSetup: ObservableObject {
         guard startupObservation != nil, !store.captureChanging else { return }
         startupObservation = nil; busy = false
         if !store.isRunning || store.activeLANAddress != expectedAddress {
-            takeFailure("代理未能确认局域网入口，请查看错误后重试。")
+            takeFailure("Could not confirm the LAN listener. Review the error and try again.")
         }
     }
 

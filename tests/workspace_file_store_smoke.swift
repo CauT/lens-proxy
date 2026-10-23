@@ -123,7 +123,7 @@ server.serve_forever()
             try require(store.sessionAction?.kind == .saveWorkspace && store.workspaceFileURL == nil, "First Save did not ask a destination")
             store.sessionAction = nil
             try require(store.workspaceFileURL == nil && recents.isEmpty, "Cancel assigned or remembered an unsaved destination")
-            let a = root.appendingPathComponent("workspace-A-中文-e\u{301}.lens.json")
+            let a = root.appendingPathComponent("workspace-A-\u{4e2d}\u{6587}-e\u{301}.lens.json")
             let firstSaved = try await saved(a)
             try require(firstSaved, "First Save failed")
             try require(!store.needsWorkspaceSaveConfirmation, "Quiet successful Save remained edited")
@@ -143,7 +143,7 @@ server.serve_forever()
             store.newSession()
             try await wait("new session") { store.sessions.count == 2 && store.currentSessionID != firstSession }
             var renamed: Bool?
-            store.renameSession(store.currentSessionID, name: "API 中文") { renamed = $0 }
+            store.renameSession(store.currentSessionID, name: "API \u{4e2d}\u{6587}") { renamed = $0 }
             try await wait("rename") { renamed != nil }
             try require(renamed == true, "Rename failed")
             _ = try await request("/workspace-second")

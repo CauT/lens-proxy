@@ -10,7 +10,7 @@ class MethodSemantics(unittest.TestCase):
         for value in ('HEAD', 'POST', 'Custom-Method', 'head'):
             self.assertEqual(parse_method(value), value)
             self.assertEqual(request_method(http.Request.make(value, 'http://example.test/')), value)
-        for value in ('', 'GET POST', 'bad\r\n', '中文', None):
+        for value in ('', 'GET POST', 'bad\r\n', '\u4e2d\u6587', None):
             with self.assertRaises(ValueError): parse_method(value)
 
     def test_head_conversion_retains_prior_framing_and_is_idempotent(self):

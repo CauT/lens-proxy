@@ -38,7 +38,7 @@ FORM = (
 MIXED_TYPE = 'multipart/mixed; boundary="outer:reply"'
 MIXED = (
     b'--outer:reply\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n'
-    + '第一段'.encode() + b'\r\n--outer:reply\r\n'
+    + '\u7b2c\u4e00\u6bb5'.encode() + b'\r\n--outer:reply\r\n'
     b'Content-Type: multipart/alternative; boundary=inner-reply\r\n\r\n'
     b'--inner-reply\r\nContent-Type: text/plain\r\n\r\nplain\r\n'
     b'--inner-reply\r\nContent-Type: text/html\r\n'

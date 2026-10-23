@@ -23,14 +23,14 @@ class PatternRulesAcceptance(RewriteFixture):
         self.configure(self.group('API captures', actions))
         for secure, h2 in ((False, False), (True, False), (True, True)):
             with self.subTest(secure=secure, h2=h2):
-                payload = 'old 12 中文\x00\xff'.encode('utf-8')
+                payload = 'old 12 \u4e2d\u6587\x00\xff'.encode('utf-8')
                 url = self.url('/coding/gzip', secure)
                 response, raw = self.request(url, gzip.compress(payload, mtime=0), [*REPEATED, ('Content-Encoding', 'gzip')], h2=h2)
                 self.assertEqual(response.status_code, 200)
                 self.assertEqual(response.http_version, 'HTTP/2' if h2 else 'HTTP/1.1')
-                self.assertEqual(gzip.decompress(raw), 'final:12 中文\x00\xff'.encode('utf-8'))
+                self.assertEqual(gzip.decompress(raw), 'final:12 \u4e2d\u6587\x00\xff'.encode('utf-8'))
                 observed = self.observed(secure=secure)
-                self.assertEqual(observed['decoded'], 'new:12 中文\x00\xff'.encode('utf-8'))
+                self.assertEqual(observed['decoded'], 'new:12 \u4e2d\u6587\x00\xff'.encode('utf-8'))
                 self.assertEqual(values(observed['headers'], 'Seen-Change'), ['after-one', 'after-two'])
                 self.assertEqual(values(observed['headers'], 'X-Keep'), ['one', 'two'])
                 flow = self.engine.flow(url)

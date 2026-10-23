@@ -17,8 +17,8 @@ from test_rewrite import request_flow
 class PatternBoundaries(unittest.TestCase):
     def test_unicode_groups_named_groups_quoting_and_opaque_bytes_are_preserved(self):
         operation = TextRewrite.prepare({'rewrite_regex': True}, r'(?<key>\w+)=(\d+)', '${key}:$2;\\$1', 1024)
-        source = '中文=12 x=34'.encode() + b'\xff'
-        self.assertEqual(operation.plan(source, 1024).render(), '中文:12;$1 x:34;$1'.encode() + b'\xff')
+        source = '\u4e2d\u6587=12 x=34'.encode() + b'\xff'
+        self.assertEqual(operation.plan(source, 1024).render(), '\u4e2d\u6587:12;$1 x:34;$1'.encode() + b'\xff')
         literal = TextRewrite.prepare({}, 'x', '$1\\end', 1024)
         self.assertEqual(literal.plan(b'x', 1024).render(), b'$1\\end')
         empty = TextRewrite.prepare({'rewrite_regex': True}, '', 'entire', 1024)

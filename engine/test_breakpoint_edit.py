@@ -105,24 +105,24 @@ class BreakpointEditSemantics(unittest.TestCase):
     def test_legacy_body_uses_same_validation_encoding_and_stage_owner(self):
         flow = flow_for("response")
         flow.response.headers["Content-Encoding"] = "gzip"
-        prepare_edit(flow, {"response_body": "测试"}).apply(flow)
-        self.assertEqual(gzip.decompress(flow.response.raw_content), "测试".encode())
+        prepare_edit(flow, {"response_body": "\u6d4b\u8bd5"}).apply(flow)
+        self.assertEqual(gzip.decompress(flow.response.raw_content), "\u6d4b\u8bd5".encode())
         for value in (None, b"bytes", ["text"]):
             with self.assertRaises(ValueError):
                 prepare_edit(flow, {"response_body": value})
         with patch.object(edits, "BODY_BYTES", 2), self.assertRaises(ValueError):
-            prepare_edit(flow, {"response_body": "测试"})
+            prepare_edit(flow, {"response_body": "\u6d4b\u8bd5"})
 
     def test_header_rules_keep_duplicates_order_and_explicit_wire_bytes(self):
         flow = flow_for()
         original_host = tuple(item for item in flow.request.headers.fields if item[0].lower() == b"host")
-        prepare_edit(flow, {"request_edit": {"headers": [["X-Raw", "\udcff"], ["X-Raw", "中文"], ["X-Last", "z"]]}}).apply(flow)
-        self.assertEqual(flow.request.headers.fields[:3], ((b"X-Raw", b"\xff"), (b"X-Raw", "中文".encode()), (b"X-Last", b"z")))
+        prepare_edit(flow, {"request_edit": {"headers": [["X-Raw", "\udcff"], ["X-Raw", "\u4e2d\u6587"], ["X-Last", "z"]]}}).apply(flow)
+        self.assertEqual(flow.request.headers.fields[:3], ((b"X-Raw", b"\xff"), (b"X-Raw", "\u4e2d\u6587".encode()), (b"X-Last", b"z")))
         self.assertEqual(tuple(item for item in flow.request.headers.fields if item[0].lower() == b"host"), original_host)
         for headers in (None, {}, [["X", "a", "b"]], [["", "value"]], [["X:Bad", "v"]],
-                        [["X-中文", "v"]], [["X", "bad\0value"]], [["X", "\ud800"]], [["X", 1]],
+                        [["X-\u4e2d\u6587", "v"]], [["X", "bad\0value"]], [["X", "\ud800"]], [["X", 1]],
                         [["Host", "evil"]], [["cOnTeNt-LeNgTh", "99"]], [["Transfer-Encoding", "chunked"]],
-                        [["X", "v"]] * 1025, [["X", "中" * 21846]]):
+                        [["X", "v"]] * 1025, [["X", "\u4e2d" * 21846]]):
             with self.subTest(headers_type=type(headers), count=len(headers) if headers else 0), self.assertRaises(ValueError):
                 prepare_edit(flow, {"request_edit": {"headers": headers}})
         prepare_edit(flow, {"request_edit": {"headers": [["X", "\udcff" * 65531]]}})
@@ -133,13 +133,13 @@ class BreakpointEditSemantics(unittest.TestCase):
         for url in ("/relative", "ftp://example.test/a", "http://example.test/#", "http://example.test/#part",
                     "http://example.test/a\n", " http://example.test/", "http://example.test:0/",
                     "http://example.test:65536/", "http://example.test:/", "http://example.test\\evil/",
-                    "http://user@example.test/", "http://example.test/中文", 123):
+                    "http://user@example.test/", "http://example.test/\u4e2d\u6587", 123):
             with self.subTest(url=url), self.assertRaises(ValueError):
                 prepare_edit(flow_for(), {"request_edit": {"url": url}})
-        for method in ("", "GET POST", "G\nET", "中文", None):
+        for method in ("", "GET POST", "G\nET", "\u4e2d\u6587", None):
             with self.subTest(method=method), self.assertRaises(ValueError):
                 prepare_edit(flow_for(), {"request_edit": {"method": method}})
-        for url, host in (("https://中文.test/a", "中文.test"), ("http://[::1]:8080/a", "::1")):
+        for url, host in (("https://\u4e2d\u6587.test/a", "\u4e2d\u6587.test"), ("http://[::1]:8080/a", "::1")):
             flow = flow_for()
             prepare_edit(flow, {"request_edit": {"url": url}}).apply(flow)
             self.assertEqual(flow.request.host, host)

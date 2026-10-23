@@ -118,7 +118,7 @@ class LANProxyAcceptance(unittest.TestCase):
             self.assertIn('id="lens-connected"', landing.text)
             self.assertIn('href="/certificate.cer"', landing.text)
             self.assertIn(self.engine.ready["ca_sha256"], landing.text)
-            self.assertIn("已连接 Lens", landing.text)
+            self.assertIn("Connected to Lens", landing.text)
             self.assertNotIn(b"PRIVATE KEY", landing.content)
             for path in ("/unknown", "/mitmproxy-ca.pem", "/../mitmproxy-ca.pem"):
                 self.assertEqual(client.get("http://lens.invalid" + path).status_code, 404)

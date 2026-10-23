@@ -254,7 +254,7 @@ class WebSocketCaptureAcceptance(unittest.TestCase):
 
     def test_http_text_binary_empty_and_opcode_identity(self):
         client = self.client()
-        payloads = [(1, 'Hello 世界'.encode()), (2, b'valid UTF-8 stays binary'),
+        payloads = [(1, 'Hello \u4e16\u754c'.encode()), (2, b'valid UTF-8 stays binary'),
                     (2, b'\x00\xff\xc0\xaf'), (2, b'')]
         for opcode, payload in payloads:
             self.assertEqual(client.send(opcode, payload), (opcode, payload))
@@ -269,7 +269,7 @@ class WebSocketCaptureAcceptance(unittest.TestCase):
     def test_strict_wss_both_directions(self):
         client = self.client('/strict-wss', secure=True)
         self.assertIsNotNone(client.socket.getpeercert())
-        for opcode, payload in [(1, 'TLS 文本'.encode()), (2, b'\xff\x00secure')]:
+        for opcode, payload in [(1, 'TLS \u6587\u672c'.encode()), (2, b'\xff\x00secure')]:
             self.assertEqual(client.send(opcode, payload), (opcode, payload))
         client.normal_close()
         detail = self.detail(client, 4)
@@ -280,7 +280,7 @@ class WebSocketCaptureAcceptance(unittest.TestCase):
         client = self.client('/fragmented')
         # The cut at byte 15 splits a UTF-8 scalar; only complete reassembled
         # messages may be interpreted as text by either endpoint or inspector.
-        payload = b'A' + '零一二三四五六七八九'.encode()
+        payload = b'A' + '\u96f6\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d'.encode()
         self.assertEqual(client.send(1, payload, fragmented=True), (1, payload))
         client.normal_close()
         detail = self.detail(client, 2)

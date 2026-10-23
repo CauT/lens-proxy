@@ -103,7 +103,7 @@ class Conversions(unittest.TestCase):
     def test_har_utf8_expansion_and_cumulative_entries_reject_before_import(self):
         entry = export_flow(tflow.tflow(resp=True))
         entry.pop("_lensRawRequestBody")
-        entry["request"]["postData"] = {"text": "界" * 400}
+        entry["request"]["postData"] = {"text": "\u754c" * 400}
         with self.assertRaisesRegex(ValueError, "byte budget"):
             ImportBudget(1, 4096, max_body_bytes=1024).prepare(entry)
         first = export_flow(tflow.tflow(resp=True))

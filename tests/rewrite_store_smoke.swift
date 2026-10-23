@@ -81,7 +81,7 @@ server.serve_forever()
             store.port = String(ports["proxy"]!); store.start()
             try await wait("engine ready") { store.isRunning || (!store.isStarting && store.errorMessage != nil) }
             try require(store.isRunning, store.errorMessage ?? "Engine did not start")
-            let query = ProxyRule(kind: "rewrite_request_query", name: "token", value: "空 格", rewriteMode: "set")
+            let query = ProxyRule(kind: "rewrite_request_query", name: "token", value: "\u{7a7a} \u{683c}", rewriteMode: "set")
             let url = ProxyRule(kind: "rewrite_request_url", name: "/old?", value: "/new?")
             let header = ProxyRule(kind: "rewrite_request_header", name: "X-Ordered", value: "one", rewriteMode: "add")
             let body = ProxyRule(kind: "rewrite_response_body", name: "old", value: "new", rewriteCount: "first")

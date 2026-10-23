@@ -2,8 +2,8 @@ import AppKit
 import SwiftUI
 
 enum LensConnectionPage: String, CaseIterable {
-    case welcome = "新手引导"
-    case system = "这台 Mac"
+    case welcome = "Get Started"
+    case system = "This Mac"
     case android = "Android"
     case ios = "iPhone & iPad"
     case client = "Client connection"
@@ -43,7 +43,7 @@ struct LensConnectionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("开始使用 Lens").font(.title2.weight(.semibold))
+            Text("Get Started with Lens").font(.title2.weight(.semibold))
             Picker("Connection page", selection: $page) {
                 ForEach(LensConnectionPage.allCases, id: \.self) { Text($0.rawValue).tag($0) }
             }.pickerStyle(.segmented).labelsHidden()
@@ -59,7 +59,7 @@ struct LensConnectionView: View {
                     .font(.caption).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true).textSelection(.enabled)
             }
             HStack {
-                Button(page == .welcome ? "稍后再设置" : "关闭引导") { dismiss() }.keyboardShortcut(.cancelAction)
+                Button(page == .welcome ? "Set Up Later" : "Close Guide") { dismiss() }.keyboardShortcut(.cancelAction)
                 Spacer()
                 if page.isDevice { devicePrimaryAction }
                 else if page != .welcome {
@@ -87,16 +87,16 @@ struct LensConnectionView: View {
     }
 
     @ViewBuilder private var welcomeSections: some View {
-        Section("先选择要抓包的设备") {
-            destination("Android 手机 / 平板", detail: "开启局域网代理 → 设置手机 Wi-Fi 代理 → 安装证书 → 查看请求", icon: "smartphone", page: .android)
-            destination("iPhone / iPad", detail: "设置 Wi-Fi 代理 → 安装描述文件 → 开启证书完全信任", icon: "ipad.and.iphone", page: .ios)
-            destination("这台 Mac", detail: "检查现有代理，再由你选择是否接入 Mac 系统流量", icon: "desktopcomputer", page: .system)
+        Section("Choose a device to inspect") {
+            destination("Android phone / tablet", detail: "Enable LAN access → Set the Wi-Fi proxy → Install the CA → Inspect requests", icon: "smartphone", page: .android)
+            destination("iPhone / iPad", detail: "Set the Wi-Fi proxy → Install the profile → Enable full certificate trust", icon: "ipad.and.iphone", page: .ios)
+            destination("This Mac", detail: "Review existing proxies, then choose whether to route Mac traffic through Lens", icon: "desktopcomputer", page: .system)
         }
-        Section("第一次抓包，只需完成这四步") {
-            Text("1. 开启代理。2. 让设备使用代理。3. 配置 HTTPS 证书。4. 选择请求，查看 Request 和 Response。")
-            Text("代理正在运行，并不代表手机已经连接。引导会分别显示代理、HTTP 请求和 HTTPS 明文请求的状态。")
+        Section("Your first capture in four steps") {
+            Text("1. Start the proxy. 2. Connect your device. 3. Set up HTTPS trust. 4. Select a request and inspect Request and Response.")
+            Text("A running proxy does not mean your device is connected. The guide tracks proxy readiness, HTTP requests and decrypted HTTPS responses separately.")
                 .font(.callout).foregroundStyle(.secondary)
-            Text("手机抓包无需修改 Mac 系统代理，也不需要登记设备 IP。选择设备不会立即改变任何网络设置。")
+            Text("Device capture needs no Mac system proxy changes or device IP registration. Choosing a device does not change network settings.")
                 .font(.callout).foregroundStyle(.secondary)
         }
     }
@@ -118,42 +118,42 @@ struct LensConnectionView: View {
     @ViewBuilder private var devicePrimaryAction: some View {
         if deviceSetup.busy || store.isStarting {
             ProgressView().controlSize(.small)
-            Text("正在处理，请稍候…").font(.caption)
+            Text("Working, please wait…").font(.caption)
         } else if store.isRunning, store.activeLANAddress == nil {
-            Button("停止，配置手机代理", action: deviceSetup.stop).buttonStyle(.borderedProminent)
+            Button("Stop and Set Up Device Proxy", action: deviceSetup.stop).buttonStyle(.borderedProminent)
         } else if store.isRunning {
-            Button("返回抓包列表") { dismiss() }.buttonStyle(.borderedProminent)
+            Button("Back to Traffic") { dismiss() }.buttonStyle(.borderedProminent)
         } else if lanEnabled {
-            Button("保存并启动手机代理") { deviceSetup.start(port: port, address: lanAddress, sslHosts: sslHosts) }
+            Button("Save and Start Device Proxy") { deviceSetup.start(port: port, address: lanAddress, sslHosts: sslHosts) }
                 .buttonStyle(.borderedProminent).keyboardShortcut(.defaultAction)
                 .disabled(configurationIssue != nil || store.settingsSaving)
         } else {
-            Button("保存为仅本机连接") { saveAndDismiss() }.buttonStyle(.borderedProminent)
+            Button("Save for Local Clients Only") { saveAndDismiss() }.buttonStyle(.borderedProminent)
                 .disabled(configurationIssue != nil || store.settingsSaving)
         }
     }
 
     private var lanSection: some View {
-        Section("1 · 开启手机代理入口") {
+        Section("1 · Enable the device proxy") {
             if deviceSetup.stopping {
-                Label("正在停止代理并保留会话，请稍候…", systemImage: "hourglass")
+                Label("Stopping the proxy and keeping your session, please wait…", systemImage: "hourglass")
             } else if store.isStarting {
-                Label("代理正在启动，尚未确认手机连接。", systemImage: "hourglass")
-                Button("取消启动", action: deviceSetup.stop)
+                Label("Starting the proxy. Device connection has not been confirmed yet.", systemImage: "hourglass")
+                Button("Cancel Start", action: deviceSetup.stop)
             } else if deviceSetup.busy {
-                Label("正在保存设置或切换代理，请稍候…", systemImage: "hourglass")
+                Label("Saving settings or changing the proxy, please wait…", systemImage: "hourglass")
             } else if store.isRunning, let active = store.activeLANAddress {
-                Label("局域网代理已就绪：\(active):\(store.port)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
+                Label("LAN proxy ready: \(active):\(store.port)", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
                 if !store.recording {
-                    Label("录制已暂停，恢复后才会显示新请求。", systemImage: "pause.circle").foregroundStyle(.orange)
-                    Button("恢复录制", action: store.toggleRecording)
+                    Label("Recording is paused. Resume to see new requests.", systemImage: "pause.circle").foregroundStyle(.orange)
+                    Button("Resume Recording", action: store.toggleRecording)
                 }
-                Button("停止抓包以修改连接设置", action: deviceSetup.stop).disabled(deviceSetup.busy)
+                Button("Stop Capture to Change Settings", action: deviceSetup.stop).disabled(deviceSetup.busy)
             } else if store.isRunning {
-                Text("当前只监听本机，手机暂时连不上。先点击下方“停止，配置手机代理”，再保存并启动。")
+                Text("Lens is listening on loopback only, so devices cannot connect. Choose Stop and Set Up Device Proxy below, then save and start.")
                     .foregroundStyle(.orange)
             } else {
-                Text("选择 Mac 的局域网地址和端口，然后点击下方“保存并启动手机代理”。每次重新打开 Lens 后需重新开启。")
+                Text("Choose the Mac LAN address and port, then choose Save and Start Device Proxy below. Enable LAN access again each time you open Lens.")
             }
             Group {
             Toggle("Enable LAN proxy for this launch", isOn: $lanEnabled)
@@ -163,9 +163,9 @@ struct LensConnectionView: View {
                 Button("Use \(value.interface): \(value.ip)") { lanAddress = value.ip }
             }
             }.disabled(store.isRunning || store.isStarting || deviceSetup.busy)
-            Text("所有能访问该局域网地址的设备均可连接，无需设备白名单。手机抓包不会主动接管 Mac 系统代理。")
+            Text("Any device that can reach this LAN address can connect; no device allowlist is required. Device capture does not take over the Mac system proxy.")
                 .font(.caption).foregroundStyle(.secondary)
-            if lanAddresses.isEmpty { Text("未找到 Mac 的局域网 IPv4 地址，请先连接 Wi-Fi 或以太网。") .font(.caption).foregroundStyle(.orange) }
+            if lanAddresses.isEmpty { Text("No Mac LAN IPv4 address found. Connect to Wi-Fi or Ethernet first.") .font(.caption).foregroundStyle(.orange) }
             if let issue = configurationIssue {
                 Label(issue, systemImage: "exclamationmark.triangle").font(.caption).foregroundStyle(.orange)
             }
@@ -175,10 +175,10 @@ struct LensConnectionView: View {
     @ViewBuilder private var androidSections: some View {
         lanSection
         deviceProxySection
-        Section("3 · 安装 Android HTTPS 证书") {
+        Section("3 · Install the Android HTTPS certificate") {
             TextField("SSL hosts, comma-separated; * for all", text: $sslHosts)
                 .accessibilityLabel("Android HTTPS hosts to decrypt")
-            Text("在手机测试页点“下载 Lens CA”，到 Android 设置中的“安装证书 / CA 证书”安装下载文件。菜单因品牌而异，证书名称可能是 mitmproxy；安装前核对下方指纹。")
+            Text("On the device test page, choose Download Lens CA. In Android Settings, find Install a certificate / CA certificate and install the file. Menus vary by device; the certificate may be named mitmproxy. Check the fingerprint below before installing.")
                 .font(.caption).textSelection(.enabled)
             certificateIdentity
             Text("The target browser or app must trust this CA. Modern Android apps may require a debug Network Security Configuration; installing a user CA alone does not make every app trust it. Certificate-pinned apps may reject inspection.").font(.caption).foregroundStyle(.secondary)
@@ -190,51 +190,51 @@ struct LensConnectionView: View {
     @ViewBuilder private var iosSections: some View {
         lanSection
         deviceProxySection
-        Section("3 · 安装并信任 iPhone / iPad HTTPS 证书") {
+        Section("3 · Install and trust the iPhone / iPad HTTPS certificate") {
             TextField("SSL hosts, comma-separated; * for all", text: $sslHosts)
-            Text("用 Safari 打开手机测试页，下载 Lens CA。到“设置 → 通用 → VPN 与设备管理”安装下载的描述文件，再到“通用 → 关于本机 → 证书信任设置”开启该根证书的完全信任。只安装描述文件还不够。")
+            Text("Open the device test page in Safari and download Lens CA. Install the profile in Settings → General → VPN & Device Management. Then enable full trust for the root in General → About → Certificate Trust Settings. Installing the profile alone is not enough.")
                 .font(.caption).textSelection(.enabled)
             certificateIdentity
-            Link("Apple：手动安装证书后开启 SSL 信任", destination: URL(string: "https://support.apple.com/zh-cn/102390")!).font(.caption)
+            Link("Apple: Enable SSL trust for a manually installed certificate", destination: URL(string: "https://support.apple.com/en-us/102390")!).font(.caption)
         }
         deviceResultSection
     }
 
     private var deviceProxySection: some View {
-        Section("2 · 设置手机 Wi-Fi 代理，并打开测试页") {
-            Text(page == .android ? "Android：已连接的 Wi-Fi → 修改网络 / 高级选项 → 代理 → 手动。" : "iPhone / iPad：设置 → Wi-Fi → 当前网络右侧 ⓘ → 配置代理 → 手动，关闭认证。")
+        Section("2 · Set the device Wi-Fi proxy and open the test page") {
+            Text(page == .android ? "Android: Connected Wi-Fi network → Edit network / Advanced options → Proxy → Manual." : "iPhone / iPad: Settings → Wi-Fi → ⓘ beside the current network → Configure Proxy → Manual. Turn Authentication off.")
                 .font(.caption)
-            LabeledContent("代理服务器", value: lanAddress.isEmpty ? "先选择 Mac 局域网地址" : lanAddress).textSelection(.enabled)
-            LabeledContent("代理端口", value: port).textSelection(.enabled)
+            LabeledContent("Proxy server", value: lanAddress.isEmpty ? "Choose a Mac LAN address first" : lanAddress).textSelection(.enabled)
+            LabeledContent("Proxy port", value: port).textSelection(.enabled)
             HStack {
-                Button("复制服务器地址") { lensCopy(lanAddress) }.disabled(lanAddress.isEmpty)
-                Button("复制端口") { lensCopy(port) }
+                Button("Copy Server Address") { lensCopy(lanAddress) }.disabled(lanAddress.isEmpty)
+                Button("Copy Port") { lensCopy(port) }
             }
-            Text("手机与 Mac 连接同一网络。服务器只填 IP，不加 http://，也不填 127.0.0.1。")
+            Text("Connect the device and Mac to the same network. Enter only the IP address as the server, without http://. Do not use 127.0.0.1.")
                 .font(.caption).foregroundStyle(.secondary)
-            Text("手机浏览器打开：http://lens.invalid/").font(.callout.monospaced()).textSelection(.enabled)
-            Button("复制手机测试页地址") { lensCopy("http://lens.invalid/") }
-            Label(guideProgress.httpCount > 0 ? "本次引导已收到 \(guideProgress.httpCount) 个新的局域网 HTTP 请求" : "等待手机请求；测试页应显示“已连接 Lens”", systemImage: guideProgress.httpCount > 0 ? "checkmark.circle.fill" : "circle")
+            Text("Open in the device browser: http://lens.invalid/").font(.callout.monospaced()).textSelection(.enabled)
+            Button("Copy Device Test URL") { lensCopy("http://lens.invalid/") }
+            Label(guideProgress.httpCount > 0 ? "\(guideProgress.httpCount) new LAN HTTP requests received during this setup" : "Waiting for device requests. The test page should say Connected to Lens.", systemImage: guideProgress.httpCount > 0 ? "checkmark.circle.fill" : "circle")
                 .font(.caption).foregroundStyle(guideProgress.httpCount > 0 ? Color.green : Color.secondary)
         }
     }
 
     private var deviceResultSection: some View {
-        Section("4 · 确认 HTTPS 明文，并查看请求 / 响应") {
-            Label(guideProgress.httpsCount > 0 ? "本次已收到 \(guideProgress.httpsCount) 个 HTTPS 明文响应" : "等待 HTTPS 明文请求；Mac 无法直接确认手机是否已安装证书", systemImage: guideProgress.httpsCount > 0 ? "checkmark.circle.fill" : "circle")
+        Section("4 · Verify decrypted HTTPS and inspect Request / Response") {
+            Label(guideProgress.httpsCount > 0 ? "\(guideProgress.httpsCount) decrypted HTTPS responses received during this setup" : "Waiting for decrypted HTTPS traffic. The Mac cannot directly confirm whether the device has installed the CA.", systemImage: guideProgress.httpsCount > 0 ? "checkmark.circle.fill" : "circle")
                 .font(.caption).foregroundStyle(guideProgress.httpsCount > 0 ? Color.green : Color.secondary)
-            Text("在手机打开一个 HTTPS 网页或目标 App。回到 Lens，选择请求行，分别点击右侧 Request 和 Response，查看请求头和正文。仅出现 CONNECT 隧道不算 HTTPS 明文抓包成功。")
+            Text("Open an HTTPS page or target app on your device. In Lens, select the request and open Request and Response to inspect headers and bodies. A CONNECT tunnel alone does not prove HTTPS decryption.")
                 .font(.caption)
             if let latest = guideProgress.latest {
-                Button("打开本次最新请求") {
+                Button("Open Latest Request") {
                     store.selectSession(store.captureSessionID); store.search = ""; store.selectedHost = nil
                     store.selection = latest.id; dismiss()
                 }
             }
-            DisclosureGroup("仍然没有流量？按现象排查") {
-                Text("HTTP 也没有：确认上方显示“局域网代理已就绪”、手机代理 IP/端口正确、两端同一网络。访客 Wi-Fi / AP 隔离可能阻止设备互访；若 Mac 防火墙询问传入连接，请允许 Lens。")
-                Text("HTTP 有、HTTPS 失败：核对证书指纹与信任、SSL hosts 是否包含目标域名。部分 Android App 不信任用户 CA；证书固定的 App 可能拒绝抓包。")
-                Text("列表仍为空：确认录制未暂停；若正在查看旧会话，切换到录制会话。结束测试后，将手机 Wi-Fi 代理改回“无 / 关闭”。")
+            DisclosureGroup("Still no traffic? Troubleshoot by symptom") {
+                Text("No HTTP: Check that the LAN proxy is ready, the device proxy address and port are correct, and both devices share a network. Guest Wi-Fi or AP isolation may block access. If the Mac firewall asks about incoming connections, allow Lens.")
+                Text("HTTP works but HTTPS fails: Check the CA fingerprint, certificate trust and whether SSL hosts includes the target. Some Android apps do not trust user CAs; certificate-pinned apps may reject inspection.")
+                Text("Still an empty list: Check that recording is active and switch from an old session to the recording session. When finished, set the device Wi-Fi proxy back to None / Off.")
             }.font(.caption).foregroundStyle(.secondary)
         }
     }
@@ -284,12 +284,12 @@ struct LensConnectionView: View {
     }
 
     @ViewBuilder private var systemSections: some View {
-        Section("这台 Mac · 从普通浏览器请求开始") {
-            Text("1. 启动本地代理。2. 检查下方已有代理与网络服务，再由你选择“Use Lens for this service”。3. 配置 HTTPS 证书信任。4. 正常浏览后，在列表选择请求，查看 Request / Response。")
+        Section("This Mac · Start with your browser") {
+            Text("1. Start the local proxy. 2. Review the existing proxy and network service below, then choose Use Lens for this service. 3. Set up HTTPS certificate trust. 4. Browse normally, select a request and inspect Request / Response.")
                 .font(.caption)
-            if !store.isRunning && !store.isStarting { Button("启动本地代理", action: store.start) }
-            Button("查看 HTTPS 证书设置") { page = .client }
-            Text("接入 Mac 系统代理会改变此服务的 HTTP/HTTPS 路由；若依赖 Clash 等现有代理，先核对上游设置。手机抓包请选择 Android / iPhone，无须在这里接管 Mac 流量。")
+            if !store.isRunning && !store.isStarting { Button("Start Local Proxy", action: store.start) }
+            Button("Review HTTPS Certificate Setup") { page = .client }
+            Text("Using the Mac system proxy changes this service’s HTTP/HTTPS route. If you depend on an existing proxy such as Clash, review upstream settings first. For device capture, choose Android or iPhone; Mac traffic does not need to be routed here.")
                 .font(.caption).foregroundStyle(.secondary)
         }
         Section("Capture status") {

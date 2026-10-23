@@ -162,7 +162,7 @@ class RewriteBoundaries(unittest.TestCase):
     def test_query_matches_only_strictly_decoded_keys_and_preserves_source_segments(self):
         flow = request_flow()
         flow.request.data.path = b"/opaque\xff?na%6De=one&raw=%ff&na+me=two&&bad%GG=x&name&last="
-        action("rewrite_request_query", "name", "空 格").edit(flow, "request").apply(flow)
+        action("rewrite_request_query", "name", "\u7a7a \u683c").edit(flow, "request").apply(flow)
         self.assertEqual(flow.request.data.path, b"/opaque\xff?name=%E7%A9%BA%20%E6%A0%BC&raw=%ff&na+me=two&&bad%GG=x&last=")
         action("rewrite_request_query", "na me", "again", rewrite_mode="add").edit(flow, "request").apply(flow)
         self.assertTrue(flow.request.data.path.endswith(b"&na%20me=again"))

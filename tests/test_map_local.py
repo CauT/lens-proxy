@@ -48,7 +48,7 @@ class MapLocalAcceptance(unittest.TestCase):
     def test_directory_mount_query_mime_binary_and_complete_capture(self):
         (self.root / "nested").mkdir()
         payload = bytes(range(256)) * 9000  # Beyond the inspector's 2 MiB preview.
-        (self.root / "nested" / "中文 space.bin").write_bytes(payload)
+        (self.root / "nested" / "\u4e2d\u6587 space.bin").write_bytes(payload)
         (self.root / "app.css").write_bytes(b"body { color: red; }")
         self.engine.configure([self.mapping("http*://*/assets/*")])
         with self.client() as client:

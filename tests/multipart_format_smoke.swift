@@ -1,5 +1,5 @@
 // Independent byte vectors for RFC 2046 §5.1.1 and RFC 7578 §§4–5.
-// Compile with the production BodyFormatting.swift and MultipartFormatting.swift.
+// Compile with JSONDocument.swift, BodyFormatting.swift and MultipartFormatting.swift.
 // No multipart serializer/parser is reused by these fixtures.
 import Foundation
 
@@ -117,9 +117,9 @@ private struct MultipartFormatSmoke {
             try require(undeclared.contains("candidate") && undeclared.contains("charset not supplied") && !undeclared.contains("�"), "Undeclared strict UTF-8 was asserted to be a declared charset rather than an explicitly uncertain candidate")
         }))
         cases.append(("Declared UTF-8 text is readable without changing source offsets", {
-            let body = bytes("é 中文")
+            let body = bytes("é \u{4e2d}\u{6587}")
             let result = display(envelope("Content-Disposition: form-data; name=x\r\nContent-Type: text/plain; charset=UTF-8", body))
-            try require(result.contains("é 中文") && result.contains("\(body.count) bytes"), "Declared UTF-8 text or byte count changed")
+            try require(result.contains("é \u{4e2d}\u{6587}") && result.contains("\(body.count) bytes"), "Declared UTF-8 text or byte count changed")
         }))
         cases.append(("Transfer-encoded data stays raw with explicit limitation", {
             for coding in ["base64", "quoted-printable", "x-unknown"] {
@@ -286,10 +286,10 @@ private struct MultipartFormatSmoke {
         }))
         cases.append(("Invalid nested boundary reports the absolute unexamined child offset", {
             for nestedType in ["multipart/mixed", "multipart/mixed; boundary=\"bad@boundary\"", "multipart/mixed; boundary=one; boundary=two"] {
-                let source = bytes("--unit-boundary\r\nContent-Disposition: form-data; name=first\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n第一证明\r\n--unit-boundary\r\nContent-Type: \(nestedType)\r\n\r\nUNINTERPRETED_CHILD\r\n--unit-boundary\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\nLAST_SIBLING\r\n--unit-boundary--\r\n")
+                let source = bytes("--unit-boundary\r\nContent-Disposition: form-data; name=first\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n\u{7b2c}\u{4e00}\u{8bc1}\u{660e}\r\n--unit-boundary\r\nContent-Type: \(nestedType)\r\n\r\nUNINTERPRETED_CHILD\r\n--unit-boundary\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\nLAST_SIBLING\r\n--unit-boundary--\r\n")
                 guard let child = source.range(of: bytes("UNINTERPRETED_CHILD")) else { throw MultipartFailure(description: "Broken child-offset fixture") }
                 let result = display(source)
-                try require(result.contains("第一证明") && result.contains("LAST_SIBLING"), "Invalid nested boundary discarded independent outer siblings")
+                try require(result.contains("\u{7b2c}\u{4e00}\u{8bc1}\u{660e}") && result.contains("LAST_SIBLING"), "Invalid nested boundary discarded independent outer siblings")
                 try require(result.contains("[Incomplete multipart at body offset \(child.lowerBound):"), "Nested header parameter failure reported a header-relative offset as a global body position")
                 try require(!result.contains("[Incomplete multipart at body offset 0:") && !result.contains("Part 2.1"), "Unexamined nested body acquired invented offset-zero or child facts")
             }

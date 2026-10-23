@@ -8,9 +8,11 @@ import shutil
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-FOLDERS = ("Sources/", "engine/", "tests/", "scripts/", ".github/", "docs/guide/", "docs/images/")
-FILES = {"README.md", "README.zh-CN.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "VERSION",
-         "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md", ".gitignore"}
+FOLDERS = ("Sources/", "engine/", "tests/", "scripts/", ".github/", "docs/guide/")
+FILES = {"README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "VERSION",
+         "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md", ".gitignore",
+         "docs/images/README.md", "docs/images/lens-icon.png",
+         "docs/images/setup-guide-english.jpg", "docs/images/phone-setup-english.jpg"}
 
 
 def export(destination):

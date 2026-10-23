@@ -87,7 +87,7 @@ class IndividualDestinationBoundaries(unittest.TestCase):
     def test_invalid_selected_fields_fail_at_configuration_without_partial_edits(self):
         for selected in ([], {'unknown': 'x'}, {'scheme': 'ftp'}, {'host': 'http://bad'}, {'host': '[::1]'},
                          {'port': True}, {'port': '0'}, {'port': 65536}, {'port': '8x'}, {'port': '１'},
-                         {'path': 'relative'}, {'path': '/path?query'}, {'path': '/path#fragment'}, {'path': '/中文'},
+                         {'path': 'relative'}, {'path': '/path?query'}, {'path': '/path#fragment'}, {'path': '/\u4e2d\u6587'},
                          {'query_mode': 'future'}, {'query_mode': 'replace', 'query': 'bad#fragment'}, {'host': None}):
             with self.subTest(selected=selected), self.assertRaises(ValueError):
                 RemoteMapping.prepare_parts(selected, '*', 'relative')

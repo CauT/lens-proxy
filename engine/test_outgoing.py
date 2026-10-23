@@ -110,9 +110,9 @@ class OutgoingFacts(unittest.TestCase):
         self.assertEqual(len(fields), 10)
 
     def test_legacy_text_and_source_guards_share_the_request_owner(self):
-        prepared = prepare_compose({'method': 'POST', 'url': 'https://example.test/a', 'headers': [['Content-Encoding', 'gzip']], 'body': '中文'}, {})
+        prepared = prepare_compose({'method': 'POST', 'url': 'https://example.test/a', 'headers': [['Content-Encoding', 'gzip']], 'body': '\u4e2d\u6587'}, {})
         import gzip
-        self.assertEqual(gzip.decompress(prepared.snapshot.body), '中文'.encode())
+        self.assertEqual(gzip.decompress(prepared.snapshot.body), '\u4e2d\u6587'.encode())
         source = tflow.tflow()
         fingerprint = request_fingerprint(source.request)
         command = {'source_id': source.id, 'source_fingerprint': fingerprint, 'request_edit': {}}

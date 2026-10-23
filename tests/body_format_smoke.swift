@@ -1,4 +1,4 @@
-// Independent format-boundary smoke checks. Compile with BodyFormatting.swift and MultipartFormatting.swift.
+// Compile with JSONDocument.swift, BodyFormatting.swift and MultipartFormatting.swift.
 // Protobuf vectors follow https://protobuf.dev/programming-guides/encoding/
 // This is a schema-free wire viewer: readable bytes must never imply field types.
 import Foundation
@@ -150,9 +150,13 @@ private struct BodyFormatSmoke {
                 let manyNodes = "[" + Array(repeating: "0", count: 50_001).joined(separator: ",") + "]"
                 let nodeResult = BodyFormatter.render(format: .json, text: manyNodes, base64: nil, truncated: false)
                 try require(nodeResult.contains("display budget exceeded") && nodeResult.hasSuffix(manyNodes), "Wide JSON bypassed its node-count budget or lost source")
-                let expansive = "\"" + String(repeating: "x", count: 710_000) + "\""
+                let largeScalar = "\"" + String(repeating: "x", count: 710_000) + "\""
+                try require(BodyFormatter.render(format: .json, text: largeScalar, base64: nil, truncated: false) == largeScalar,
+                            "A large scalar fitting the actual display budget was rejected")
+                let expansive = String(repeating: "[", count: 32) + String(repeating: "0,", count: 40_000)
+                    + "\"" + String(repeating: "x", count: 1_800_000) + "\"" + String(repeating: "]", count: 32)
                 let byteResult = BodyFormatter.render(format: .json, text: expansive, base64: nil, truncated: false)
-                try require(byteResult.contains("display budget exceeded") && byteResult.hasSuffix(expansive), "Large estimated output bypassed its display budget or lost source")
+                try require(byteResult.contains("display budget exceeded") && byteResult.hasSuffix(expansive), "Large actual output bypassed its display budget or lost source")
         }))
         cases.append(("Malformed base64 cannot silently become replacement byte evidence", {
                 for format: BodyFormat in [.hex, .protobuf] {

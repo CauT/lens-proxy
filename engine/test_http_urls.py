@@ -42,8 +42,8 @@ class HTTPURLRendering(unittest.TestCase):
         prepared = prepare_url(source)
         self.assertEqual((prepared.source, prepared.value, prepared.authority),
                          (source, 'http://[::1]:8080/path?x=1', '[::1]:8080'))
-        unicode_url = prepare_url('https://中文.test/a')
-        self.assertEqual(unicode_url.source, 'https://中文.test/a')
+        unicode_url = prepare_url('https://\u4e2d\u6587.test/a')
+        self.assertEqual(unicode_url.source, 'https://\u4e2d\u6587.test/a')
         self.assertEqual(unicode_url.authority, 'xn--fiq228c.test')
 
     def test_prepared_target_owns_empty_query_and_default_path_without_sdk_reparse(self):
@@ -60,7 +60,7 @@ class HTTPURLRendering(unittest.TestCase):
         for port in (True, 0, 65536, '80'):
             with self.subTest(port=port), self.assertRaises(ValueError):
                 prepare_destination('https', 'valid.test', port)
-        for host, expected in (('::1', '[::1]:8080'), ('中文.test', 'xn--fiq228c.test:8080'), ('xn--fa-hia.test', 'xn--fa-hia.test:8080'), ('source_name.test', 'source_name.test:8080')):
+        for host, expected in (('::1', '[::1]:8080'), ('\u4e2d\u6587.test', 'xn--fiq228c.test:8080'), ('xn--fa-hia.test', 'xn--fa-hia.test:8080'), ('source_name.test', 'source_name.test:8080')):
             destination = prepare_destination('https', host, 8080)
             self.assertEqual(destination.authority, expected)
             self.assertEqual(destination.port, 8080)

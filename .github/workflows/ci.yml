@@ -22,6 +22,8 @@ jobs:
         run: PYTHONPATH=engine .runtime/bin/python -B -m unittest discover -s engine -v
       - name: Build standalone application
         run: bash scripts/build-app.sh
+      - name: Native JSON reader and body boundaries
+        run: bash scripts/test-json-viewer.sh
       - name: Wire and process identity workflows
         env:
           PYTHONPATH: ${{ github.workspace }}/Lens.app/Contents/Resources/site-packages

@@ -55,9 +55,9 @@ server.serve_forever()
                 return store.flows.first { !before.contains($0.id) }!
             }
             let first = try await request("/first"), firstSession = store.currentSessionID
-            var renamed: Bool?; store.renameSession(firstSession, name: "API 中文") { renamed = $0 }
+            var renamed: Bool?; store.renameSession(firstSession, name: "API \u{4e2d}\u{6587}") { renamed = $0 }
             try await wait("rename") { renamed != nil }
-            try require(renamed == true && store.currentSessionName == "API 中文" && store.flows.first?.id == first.id, "Rename changed identity or lost records")
+            try require(renamed == true && store.currentSessionName == "API \u{4e2d}\u{6587}" && store.flows.first?.id == first.id, "Rename changed identity or lost records")
             store.newSession(); try await wait("new") { store.sessions.count == 2 && !store.sessionChanging }
             let secondSession = store.currentSessionID; _ = try await request("/second")
             var rejected: Bool?; store.closeSession(firstSession, backupPath: root.appendingPathComponent("missing/copy.json").path) { rejected = $0 }
@@ -77,7 +77,7 @@ server.serve_forever()
             let selectedBytes = try Data(contentsOf: backup)
             try selectedBytes.write(to: selectedInput)
             store.openWorkspaceCopy(path: selectedInput.path)
-            try await wait("open workspace") { store.hasEngine && !store.isStarting && !store.isRunning && store.sessions.count == 2 && store.sessions.contains { $0.name == "API 中文" } }
+            try await wait("open workspace") { store.hasEngine && !store.isStarting && !store.isRunning && store.sessions.count == 2 && store.sessions.contains { $0.name == "API \u{4e2d}\u{6587}" } }
             try require(try Data(contentsOf: selectedInput) == selectedBytes, "Open overwrote its selected workspace input")
             store.selectSession(firstSession); store.selection = first.id; store.loadDetail()
             try await wait("restored detail") { !store.detailLoading && store.detail?.id == first.id }

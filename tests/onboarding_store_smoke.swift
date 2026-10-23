@@ -70,7 +70,7 @@ private struct GuideFailure: Error { let message: String }
             let proxy = "http://\(arguments[2]):\(arguments[3])"
             let page = try Checks.request("http://lens.invalid/", proxy: proxy)
             let html = String(decoding: page, as: UTF8.self)
-            try Checks.require(html.contains("已连接 Lens") && html.contains(store.caSHA256), "Phone setup page/fingerprint mismatch")
+            try Checks.require(html.contains("Connected to Lens") && html.contains(store.caSHA256), "Phone setup page/fingerprint mismatch")
             try await Checks.wait("new LAN HTTP capture") { store.flows.contains { $0.url == "http://lens.invalid/" && $0.state == "complete" } }
             let baseline = Set(store.flows.map(\.id))
             let http = LensGuideProgress(flows: store.flows, excluding: [], since: guideOpenedAt, lanOnly: true)

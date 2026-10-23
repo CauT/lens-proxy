@@ -32,8 +32,8 @@ class SessionLifecycle(unittest.IsolatedAsyncioTestCase):
 
     async def test_rename_preserves_identity_and_invalid_names_leave_catalog_unchanged(self):
         first = self.lens.sessions.capture
-        result = await self.command('rename_session', name='API 中文 🦊')
-        self.assertEqual(result['sessions'][0], {'id': first.id, 'number': 1, 'name': 'API 中文 🦊'})
+        result = await self.command('rename_session', name='API \u4e2d\u6587 🦊')
+        self.assertEqual(result['sessions'][0], {'id': first.id, 'number': 1, 'name': 'API \u4e2d\u6587 🦊'})
         for name in ('', ' ', 'bad\nname', '\0', 'x' * 4097, '\ud800', None, 42):
             with self.subTest(name=str(name)[:20]), self.assertRaises(ValueError):
                 await self.command('rename_session', name=name)

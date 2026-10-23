@@ -1,10 +1,15 @@
 # Screenshot provenance
 
 - `lens-icon.png`: original Lens application icon, from this project's icon generator.
-- `inspector.jpg`: real 0.2.3 desktop UI, Response JSON for a synthetic localhost POST.
-- `request.jpg`: real 0.2.3 desktop UI, matching Request headers and JSON body.
-- `device-setup.jpg`: real 0.2.3 first-use device chooser.
+- `setup-guide-english.jpg`: real Lens 0.2.4/build 7 native Get Started window.
+- `phone-setup-english.jpg`: the actual English bootstrap response rendered in
+  Chrome on loopback, with Android and iPhone instructions expanded.
 
-Screenshots captured on 2026-10-22 with the native app, without a mock UI or image
-generation. Requests use an explicit local client proxy and contain no user
-traffic. They do not establish automatic Mac routing or phone HTTPS acceptance.
+Captured on 2026-10-23 without a mock UI or image generation. The page render is
+not a device-path acceptance test. No private capture or CA key is included.
+Neither image establishes automatic Mac routing or physical-phone HTTPS trust.
+The displayed CA fingerprint is public certificate identity, not a private key.
+
+Earlier local screenshot variants are preserved in the development checkout but
+excluded from the English-only public source export. The application icon is
+the project's original asset.

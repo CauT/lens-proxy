@@ -1,8 +1,8 @@
-# Using Lens / 使用说明
+# Using Lens
 
 ## Mac
 
-Open **Connection → 新手引导 → 这台 Mac**. Confirm the listener is ready, review
+Open **Connection → Get Started → This Mac**. Confirm the listener is ready, review
 the active service and existing proxy settings, then explicitly select **Use Lens
 for this service**. Alternatively use manual clients only. Some applications
 ignore system proxies. An empty request list does not prove an engine failure.
@@ -49,6 +49,10 @@ Trust Settings. Profile installation alone is insufficient.
 Physical iOS-device acceptance is not claimed by the initial preview.
 
 ## Inspect, edit and save
+
+JSON bodies now offer a collapsible Tree, colored Pretty text with line numbers,
+original Source, key/value search, and exact value/JSON Pointer copying.
+See the [JSON reading guide](json-viewer.md) for controls and edge cases.
 
 Select records and inspect both sides independently. Choose Text, JSON/XML, Hex,
 forms or Multipart as appropriate. Binary content remains binary; viewer limits

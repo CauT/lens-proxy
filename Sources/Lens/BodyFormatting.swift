@@ -31,14 +31,6 @@ enum BodyFormatter {
             guard depth <= 32, nodes <= 50_000, size <= remaining else { throw FormattingLimit() }
             remaining -= size
         }
-        func json(_ value: Any, depth: Int = 0) throws {
-            try admit(depth * 2 + 16, depth: depth)
-            if let value = value as? String { try admit(value.utf8.count * 6, depth: depth) }
-            else if let values = value as? [Any] { for value in values { try json(value, depth: depth + 1) } }
-            else if let values = value as? [String: Any] {
-                for (key, value) in values { try admit(key.utf8.count * 6 + 4, depth: depth); try json(value, depth: depth + 1) }
-            }
-        }
         func xml(_ node: XMLNode, depth: Int = 0) throws {
             try admit(depth * 4 + 32 + (node.name?.utf8.count ?? 0) * 2, depth: depth)
             if [.text, .comment, .attribute, .processingInstruction, .namespace].contains(node.kind) {
@@ -62,12 +54,8 @@ enum BodyFormatter {
         case .text: return prefix + text
         case .json:
             do {
-                let object = try JSONSerialization.jsonObject(with: bytes, options: .fragmentsAllowed)
-                try DisplayBudget().json(object)
-                let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys, .fragmentsAllowed])
-                return prefix + String(decoding: data, as: UTF8.self)
-            } catch is FormattingLimit { return prefix + "[Pretty-print display budget exceeded: 32 levels, 50,000 nodes or 4 MiB estimated output. Showing source text.]\n\n" + text
-            } catch { return prefix + "[Invalid or incomplete JSON: \(error.localizedDescription)]\n\n" + text }
+                return try JSONPresentation.make(data: bytes, truncated: truncated).text
+            } catch { return prefix + "[JSON formatting cancelled.]" }
         case .xml:
             guard let text = String(data: bytes, encoding: .utf8) else { return prefix + "[XML viewer requires UTF-8 source bytes. Use Hex or save the complete body for other encodings.]" }
             // External entities never load. DTDs are deliberately outside this
@@ -152,6 +140,13 @@ actor BodyRenderWorker {
     func render(_ input: BodyRenderInput) -> String? {
         guard !Task.isCancelled else { return nil }
         return BodyFormatter.render(format: input.format, text: input.text, base64: input.base64, truncated: input.truncated, contentTypes: input.contentTypes)
+    }
+    func renderJSON(_ input: BodyRenderInput) -> JSONPresentation? {
+        guard !Task.isCancelled else { return nil }
+        return try? JSONPresentation.make(text: input.text, base64: input.base64, truncated: input.truncated)
+    }
+    func searchJSON(_ document: JSONDocument, query: String) -> [Int]? {
+        try? document.search(query)
     }
 }
 

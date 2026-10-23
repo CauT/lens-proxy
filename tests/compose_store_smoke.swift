@@ -134,7 +134,7 @@ Path(sys.argv[1]).write_text(json.dumps([server.server_port,port])); server.serv
 
             var edited = unchanged; edited.message.method = "PATCH"; edited.message.url = base + "/edited"
             edited.message.headers = [HTTPHeaderRow(name: "X-Repeat", value: "three"), HTTPHeaderRow(name: "X-Repeat", value: "four")]
-            edited.message.replaceBody = true; edited.message.body = "replacement 文本"
+            edited.message.replaceBody = true; edited.message.body = "replacement \u{6587}\u{672c}"
             store.selection = copied.id
             let changed = try await queue(store, edited)
             try require(changed.method == "PATCH" && changed.url.hasSuffix("/edited") && changed.requestOperation?.sourceId == source.id, "Selection changed fixed Compose method/URL/source")

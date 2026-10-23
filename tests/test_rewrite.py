@@ -198,24 +198,24 @@ class RewriteWireAcceptance(RewriteFixture):
         self.assertNotIn('X-Tail', response.headers)
 
     def test_utf8_literal_body_order_first_all_and_binary_neighbors(self):
-        self.configure(self.rule('rewrite_request_body', '甲', '乙', rewrite_count='first'),
-                       self.rule('rewrite_request_body', '乙', '丙'),
-                       self.rule('rewrite_response_body', '甲', '末'),
-                       self.rule('rewrite_response_body', '丙', '终'))
-        original = b'\x00\xff' + '甲甲'.encode() + b'\x80tail'
-        request_expected = b'\x00\xff' + '丙甲'.encode() + b'\x80tail'
-        response_expected = b'\x00\xff' + '终末'.encode() + b'\x80tail'
+        self.configure(self.rule('rewrite_request_body', '\u7532', '\u4e59', rewrite_count='first'),
+                       self.rule('rewrite_request_body', '\u4e59', '\u4e19'),
+                       self.rule('rewrite_response_body', '\u7532', '\u672b'),
+                       self.rule('rewrite_response_body', '\u4e19', '\u7ec8'))
+        original = b'\x00\xff' + '\u7532\u7532'.encode() + b'\x80tail'
+        request_expected = b'\x00\xff' + '\u4e19\u7532'.encode() + b'\x80tail'
+        response_expected = b'\x00\xff' + '\u7ec8\u672b'.encode() + b'\x80tail'
         response, raw = self.request(self.url('/utf8'), original)
         self.assertEqual(self.observed()['raw'], request_expected)
         self.assertEqual(raw, response_expected)
         self.assertEqual(response.headers['Content-Length'], str(len(response_expected)))
 
     def test_compressed_rewrites_match_decoded_bytes_and_actual_encoded_framing(self):
-        self.configure(self.rule('rewrite_request_body', 'before', '之后'),
-                       self.rule('rewrite_response_body', '之后', 'FINAL'))
-        original = b'\x00\xffbefore-' + '中文'.encode() + b'-before\x00'
-        outgoing = original.replace(b'before', '之后'.encode())
-        received = outgoing.replace('之后'.encode(), b'FINAL')
+        self.configure(self.rule('rewrite_request_body', 'before', '\u4e4b\u540e'),
+                       self.rule('rewrite_response_body', '\u4e4b\u540e', 'FINAL'))
+        original = b'\x00\xffbefore-' + '\u4e2d\u6587'.encode() + b'-before\x00'
+        outgoing = original.replace(b'before', '\u4e4b\u540e'.encode())
+        received = outgoing.replace('\u4e4b\u540e'.encode(), b'FINAL')
         for coding, secure, h2 in (('gzip', False, False), ('deflate', True, False), ('br', True, True)):
             with self.subTest(coding=coding, secure=secure, h2=h2):
                 url = self.url('/coding/' + coding, secure)
@@ -250,7 +250,7 @@ class RewriteWireAcceptance(RewriteFixture):
     def test_content_encoding_rewrite_transcodes_from_original_decoded_bytes(self):
         self.configure(self.rule('rewrite_request_header', 'Content-Encoding', 'br'),
                        self.rule('rewrite_response_header', 'Content-Encoding', 'identity'))
-        original = '压缩正文'.encode() + b'\x00\xff'
+        original = '\u538b\u7f29\u6b63\u6587'.encode() + b'\x00\xff'
         response, raw = self.request(self.url('/coding/gzip'), ENCODE['gzip'](original), [('Content-Encoding', 'gzip')])
         observed = self.observed()
         self.assertEqual(values(observed['headers'], 'Content-Encoding'), ['br'])
@@ -334,8 +334,8 @@ class RewriteWireAcceptance(RewriteFixture):
         self.assertEqual(self.entry(target), entry)
 
     def test_query_modes_preserve_unmatched_raw_segments_empty_fields_and_key_spelling(self):
-        self.configure(self.rule('rewrite_request_query', 'tag', '新 值+', rewrite_mode='set'),
-                       self.rule('rewrite_request_query', 'added key', '值 ', rewrite_mode='add'),
+        self.configure(self.rule('rewrite_request_query', 'tag', '\u65b0 \u503c+', rewrite_mode='set'),
+                       self.rule('rewrite_request_query', 'added key', '\u503c ', rewrite_mode='add'),
                        self.rule('rewrite_request_query', 'plus key', rewrite_mode='remove'))
         path = '/query/%2f?tag=one&ta%67=two&bad%ZZ=raw&%FF=opaque&bare&&keep=%2f&tag=three&plus+key=old&plus%20key=two&last='
         status, _ = self.raw_get(self.url(path))

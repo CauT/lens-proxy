@@ -17,7 +17,7 @@ def encoded(fields):
 
 class HTTPHeaderByteBoundary(unittest.TestCase):
     def test_text_and_base64_inputs_share_raw_validation_and_duplicate_order(self):
-        fields = [(b'X-Raw', b'\xff'), (b'X-Dup', b'one'), (b'X-Dup', '中文'.encode())]
+        fields = [(b'X-Raw', b'\xff'), (b'X-Dup', b'one'), (b'X-Dup', '\u4e2d\u6587'.encode())]
         text = [[name.decode('ascii'), value.decode('utf-8', 'surrogateescape')] for name, value in fields]
         self.assertEqual(prepare_headers(text).fields, tuple(fields))
         raw = prepare_headers(encoded(fields), encoded=True)

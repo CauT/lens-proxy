@@ -41,9 +41,9 @@ class AccessPolicySemantics(unittest.TestCase):
         self.assertIsNone(parse_access_policy({"block_enabled": True}).deny("https://any.test/"))
 
     def test_matching_retains_fnmatchcase_semantics_and_prepares_once(self):
-        patterns = ["https://Case.test/[!a-c]?/*", "https://中文.test/*?q=[[]x]", "*", "["]
+        patterns = ["https://Case.test/[!a-c]?/*", "https://\u4e2d\u6587.test/*?q=[[]x]", "*", "["]
         urls = ["https://Case.test/z0/item", "https://case.test/z0/item", "https://Case.test/a0/item",
-                "https://中文.test/path?q=[x]", "[", "https://x.test/a?b=c"]
+                "https://\u4e2d\u6587.test/path?q=[x]", "[", "https://x.test/a?b=c"]
         for pattern in patterns:
             policy = parse_access_policy({"block_enabled": True, "block": [pattern]})
             expected = [fnmatch.fnmatchcase(url, pattern) for url in urls]
@@ -72,11 +72,11 @@ class AccessPolicySemantics(unittest.TestCase):
             policy.block[0] = "*"
 
     def test_exact_pattern_count_and_unicode_codepoint_boundaries(self):
-        source = "界" * MAX_PATTERN_LENGTH
+        source = "\u754c" * MAX_PATTERN_LENGTH
         policy = parse_access_policy({"block": [source] * MAX_PATTERNS, "allow": ["*"] * MAX_PATTERNS})
         self.assertEqual(policy.public()["block"], [source] * MAX_PATTERNS)
         for field in ("block", "allow"):
-            for invalid in (["*"] * (MAX_PATTERNS + 1), [source + "界"]):
+            for invalid in (["*"] * (MAX_PATTERNS + 1), [source + "\u754c"]):
                 with self.subTest(field=field), self.assertRaises(ValueError):
                     parse_access_policy({field: invalid})
         self.assertEqual(parse_access_policy({"block": ["🚀" * MAX_PATTERN_LENGTH]}).block[0],

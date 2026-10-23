@@ -7,9 +7,9 @@
 <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-black">
 </p>
-<p align="center"><a href="README.zh-CN.md">简体中文</a> · <a href="https://github.com/CauT/lens-proxy/releases">Download</a> · <a href="docs/guide/usage.md">User guide</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
+<p align="center"><a href="https://github.com/CauT/lens-proxy/releases">Download</a> · <a href="docs/guide/usage.md">User guide</a> · <a href="CONTRIBUTING.md">Contribute</a></p>
 
-![Lens inspecting a demonstration request and JSON response](docs/images/inspector.jpg)
+![Lens Get Started guide for Mac, Android and iPhone](docs/images/setup-guide-english.jpg)
 
 Lens brings request inspection, traffic editing and phone debugging into a Mac
 workspace. Inspect headers and bodies, pause a request, change its destination,
@@ -20,6 +20,11 @@ or hosted capture service. Review sensitive traffic before sharing any exports.
 > notarized**. macOS may block the download. Packaging verifies integrity,
 > not Gatekeeper acceptance. Source builds are available. Intel source builds
 > need separate acceptance; no Intel binary is included in this preview.
+
+The main branch contains the 0.2.4 development source with the JSON reader and
+English setup guide. Published 0.2.3 downloads predate these changes. Final visual
+acceptance of the wrapped JSON layout is pending; see the
+[current verification scope](docs/guide/verification.md).
 
 ## Features
 
@@ -37,12 +42,16 @@ Lens is independent and unaffiliated with Charles. It includes original
 application code and open-source mitmproxy, with no Charles code, artwork or
 certificates. It does not claim complete Charles compatibility.
 
+JSON inspection includes a collapsible tree, syntax-colored Pretty view, original
+Source, key/value search and exact value/JSON Pointer copying. It retains source
+order, duplicate members and large integer spelling. [JSON reading guide](docs/guide/json-viewer.md).
+
 ## Quick start
 
 1. Get the DMG from [Releases](https://github.com/CauT/lens-proxy/releases).
    Check its signing status and SHA-256. Open it, drag **Lens.app → Applications**,
    eject the image, then open Lens.
-2. Open **Connection → 新手引导** and choose Mac, Android or iPhone/iPad.
+2. Open **Connection → Get Started** and choose Mac, Android or iPhone/iPad.
 3. Start with HTTP. For Mac traffic, review the active network service and
    explicitly choose **Use Lens for this service**, or configure one client.
    Starting a listener alone does not route ordinary browser traffic.
@@ -72,7 +81,7 @@ user CAs or pin certificates; Lens does not bypass that protection.
 LAN starts disabled on every app launch. All devices able to reach an enabled
 LAN address can connect.
 
-![Lens device setup](docs/images/device-setup.jpg)
+![Lens connection test page with Android and iPhone certificate instructions](docs/images/phone-setup-english.jpg)
 
 ## Build from source
 

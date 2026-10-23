@@ -1,5 +1,5 @@
 // Real proxy details -> production Foundation model -> actor/formatter.
-// Compile with Models.swift, NativeJSON.swift, BodyFormatting.swift and
+// Compile with Models.swift, NativeJSON.swift, JSONDocument.swift, BodyFormatting.swift and
 // MultipartFormatting.swift, or import the unchanged shared native test module.
 import Foundation
 
@@ -36,7 +36,7 @@ private func require(_ condition: @autoclosure () -> Bool, _ reason: String) thr
                     try require(output.contains("X-Part: one") && output.contains("X-Part: two") && output.contains("00 ff 62 69 6e 61 72 79"), "Actual duplicate part headers/binary bytes lost")
                 } else {
                     let htmlVisible = output.contains("<p>html</p>") || output.contains("<p>html<\\/p>")
-                    try require(output.contains("Part 2.1") && output.contains("Part 2.2") && output.contains("第一段") && htmlVisible, "Actual nested MIME response lost: " + output)
+                    try require(output.contains("Part 2.1") && output.contains("Part 2.2") && output.contains("\u{7b2c}\u{4e00}\u{6bb5}") && htmlVisible, "Actual nested MIME response lost: " + output)
                 }
                 outputs.append(output)
             }

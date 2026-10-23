@@ -31,7 +31,7 @@ from cryptography.x509.oid import ExtendedKeyUsageOID, NameOID
 from test_e2e import EngineHarness
 
 
-PLAIN_TEXT = "Lens compressed response — 本地证据\n" * 8
+PLAIN_TEXT = "Lens compressed response — \u672c\u5730\u8bc1\u636e\n" * 8
 PLAIN = PLAIN_TEXT.encode()
 COMPRESSORS = {"gzip": gzip.compress, "deflate": zlib.compress, "br": brotli.compress}
 
